@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>계산기</title>
+<script type="text/javascript">
+	function calculator() {
+		// 유효성 검사
+		if ( document.myForm.num1.value == "" ) {
+			alert("수1을 입력하세요.");
+			document.myForm.num1.focus();
+			return;
+		}
+		if ( document.myForm.operator.value == "" ) {
+			alert("연산자를 선택하세요.");
+			return;
+		}
+		if ( document.myForm.num2.value == "" ) {
+			alert("수2를 입력하세요.");
+			document.myForm.num2.focus();
+			return;
+		}
+		// 0으로 나누려는 연산 방지
+		if ( document.myForm.operator.value == "÷" && document.myForm.num2.value == 0 ) {
+			alert("0으로 나눌 수 없습니다.");
+			document.myForm.num2.value = "";
+			document.myForm.num2.focus();
+			return;
+		}
+		document.myForm.action = "/02_servlet/Ex09_request";
+		document.myForm.submit();
+	}
+	
+	/*	=== select 태그를 배열로 처리한 경우 ===
+	function calculator() {
+		// 유효성 검사
+		if ( document.myForm.num1.value == "" ) {
+			alert("수1을 입력하세요.");
+			document.myForm.num1.focus();
+			return;
+		}
+		var opList = document.myForm.operator;	// 5개(opList[0], ... opList[4])
+		if ( opList[0].selected == true )	{
+			alert("연산자를 선택하세요.");
+			return;
+		}
+		if ( document.myForm.num2.value == "" ) {
+			alert("수2를 입력하세요.");
+			document.myForm.num2.focus();
+			return;
+		}
+		// 0으로 나누려는 연산 방지
+		if ( opList[4].selected == true && document.myForm.num2.value == 0 ) {
+			alert("0으로 나눌 수 없습니다.");
+			document.myForm.num2.value = "";
+			document.myForm.num2.focus();
+			return;
+		}
+		document.myForm.action = "/02_servlet/Ex09_request";
+		document.myForm.submit();
+	}
+	*/
+	
+</script>
+</head>
+<body>
+	<form name="myForm">
+		<div>
+			<input type="number" name="num1" />
+			<select name="operator">
+				<option value=""> :: 선택 :: </option>
+				<option value="+"> ＋ </option>
+				<option value="-"> － </option>
+				<option value="×"> × </option>
+				<option value="÷"> ÷ </option>
+			</select>
+			<input type="number" name="num2" />
+		</div>
+		<br />
+		<input type="button" value="계산" onclick="calculator()" />
+	</form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function send() {
+		var query = document.getElementById("q");
+		if (query.value == "") {
+			alert("검색 내용을 입력하세요.");
+			query.focus();
+		}
+		// 어느 서블릿으로 보내는지는 action 을 이용한다.
+		// 서블릿으로 폼 요소의 데이터를 보낼 때는 submit 을 이용한다.
+		document.myForm.action = "/02_servlet/Ex06_request";	// action="/컨텍스트패스/서블릿이름"
+		document.myForm.submit();
+	}
+</script>
+</head>
+<body>
+	<form name="myForm">
+		검색 <input type="text" name="query" id="q" /> <input type="button" value="send" onclick="send()" />
+	</form>
+</body>
+</html>

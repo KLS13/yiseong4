@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>성적 관리</title>
+<script type="text/javascript">
+	function testResult() {
+		// 유효성 검사
+		if ( document.myForm.name.value == "" ) {
+			alert("이름을 입력하세요.");
+			document.myForm.name.focus();
+			return;
+		}
+		if ( document.myForm.kor.value == "" ) {
+			alert("국어 점수를 입력하세요.");
+			document.myForm.kor.focus();
+			return;
+		}
+		if ( document.myForm.eng.value == "" ) {
+			alert("영어 점수를 입력하세요!");
+			document.myForm.eng.focus();
+			return;
+		}
+		if ( document.myForm.mat.value == "" ) {
+			alert("수학 점수을 입력하세요!");
+			document.myForm.mat.focus();
+			return;
+		}
+		document.myForm.action = "/02_servlet/Ex08_request";
+		document.myForm.submit();
+	}
+</script>
+</head>
+<body>
+	<form name="myForm" method="post">
+		<fieldset style="width: 300px;">
+			<legend>성적관리 프로그램</legend>
+			<div>성명 : <input type="text" name="name" /></div>
+			<div>국어 : <input type="number" name="kor" /></div>
+			<div>영어 : <input type="number" name="eng" /></div>
+			<div>수학 : <input type="number" name="mat" /></div>
+			<br />
+			<div>
+				<input type="button" value="결과확인" onclick="testResult()" />
+				<input type="reset" value="초기화" />
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>
