@@ -1,0 +1,59 @@
+JSP (Java Server Page)
+	1. 서블릿 기반의 서버측 스크립트 ( 백 엔드 )
+	2. 동작순서
+		abc.jsp -> abc_jsp.java(서블릿) -> abc_jsp.class -> Run
+	3. 모든 jsp는 servlet 으로 변환된다.
+	* 서블릿 클래스 위치 *
+	D:\JavaWeb-KLS\jspStudy\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\프로젝트명\org\apache\jsp
+	D:\JavaWeb-KLS\jspStudy\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\03_jsp\org\apache\jsp
+	4. 용도
+		1) JSP : View 를 만드는 용도
+		2) Servlet : Logic을 만드는 용도
+		
+JSP 스크립트 요소
+	1. <%@ 지시어 %> : 지시어(directive)
+	2. <%! 선언부 %> : 선언부(declaration), 전역변수 선언, 메소드
+	3. <%= 표현식 %> : 표현식(expression), 결과 값 출력(변수값, 리턴값)
+	4. <% 스크립트릿 %> : 스크립트릿(scriptlet), 일반 자바 코드
+	
+지시어(directive)
+	1. page 지시어
+	2. taglib 지시어
+	3. include 지시어
+	
+page 지시어
+	1. 현재 페이지에 대한 속성 정보를 지정
+	2. 웹 서버가 page 지시어를 보고 해당 페이지를 처리
+	3. 속성
+			속성명					형식 					의미
+		1) language			스크립트코드에서 사용되는 언어	  <%@ page language="java" %>
+		2) contentType		html문서이고, utf-8 인코딩 사용   <%@ page contentType="text/html; charset=utf-8"%>
+		3) pageEncoding	 	인코딩 지정					  <%@ pageEncoding="utf-8" %>
+		4) import			사용할 자바클래스 지정			  <%@ page import="java.util.Calendar" %>
+		5) session			세션(session) 사용 여부 지정	  <%@ page session="true" %>
+		6) buffer			출력 버퍼의 크기 지정			  <%@ page buffer="8KB" %>
+		7) autoFlush		버퍼가 가득차면 자동으로 출력 여부 지정 <%@ page autoFlush="true" %>
+		8) errorPage		에러가 발생하면 호출할 페이지를 지정	  <%@ page errorPage="index.jsp" %>
+		9) isErrorpage		현재 페이지가 에러 페이지인가 여부 확인 <%@ page isErrorPage="false" %>
+		
+taglib 지시어
+	1. 사용할 태그 라이브러리를 지시어
+	2. JSTL 에서 사용
+	
+include 지시어
+	1. 현재 페이지에 다른 페이지를 포함시킬 때 사용
+	2. 형식	
+		<%@ include file="footer.jsp" %>
+		
+JSP 기본객체
+	1. 이미 만들어져 있는 객체이기 때문에 객채 생성(new)이 필요 없다.
+	2. 종류
+		1) request  	요청정보
+		2) response		응답정보
+		3) out 			페이지의 내용을 담고 있는  출력 스트림 객체
+		4) page			JSP 페이지의 서블릿 객체
+		5) pageContext	페이지 실행에 필요한 Context 정보를 담고 있는 객체
+		6) session		세션 정보를 담고 있는 객체
+		7) application	모든 페이지가 공유할 데이터를 담고 있는 객체
+		8) config		서블릿 설정 시 데이터 초기화 정보를 담고 있는 객체
+		9) exception	예외 처리 객체
