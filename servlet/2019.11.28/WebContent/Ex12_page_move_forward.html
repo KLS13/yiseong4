@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>페이지 이동</title>
+<script type="text/javascript">
+	function go() {
+		if(document.myForm.id.value == "" || document.myForm.pw.value == "" ) {
+			alert("모든 정보를 입력하세요.");
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+	<form name="myForm" action="/02_servlet/Ex12_page1" onsubmit="return go()">
+		<h1>로그인</h1>
+		아이디 <input type="text" name="id" autocomplete = "off"/> <br />
+		패스워드 <input type="password" name="pw" /> <br />
+		<input type="submit" value="전송" />
+	</form>
+</body>
+</html>

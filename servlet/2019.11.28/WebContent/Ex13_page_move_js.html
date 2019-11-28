@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>페이지 이동</title>
+<script type="text/javascript">
+	function go() {
+		// 자바스크립트를 이용한 페이지 이동
+		// window.location.href = "/컨텍스트패스/서블릿";  :: request 전달은 없음.
+		// window.location.href = "/컨텍스트패스/서블릿?파라미터1=값1&파라미터2=값2";  
+	   
+		window.location.href="/02_servlet/Ex13_servlet";
+	}
+</script>
+</head>
+<body>
+	<!-- <form> 태그가 없음을 주의하세요. -->
+	<input type="button" value="이동" onclick="go()"/>
+</body>
+</html>
