@@ -23,5 +23,16 @@
 		<li>서버 포트번호 : <%= request.getServerPort() %></li>
 		
 	</ul>
+	
+	<h1>request 객체의 주요 메소드</h1>
+	<ul>
+		<li>포워드: request.getRequestDispatcher("이동할경로").forward(request, response); </li>
+		<li>세션 얻기: request.getSession(); </li>
+		<li>파라미터 얻기: request.getParameter(); </li>
+		<li>파라미터들 얻기: request.getParameterValues(); </li>
+		<li>쿠키 얻기: request.getCookies(); </li>
+		<li>속성값 얻기: request.getAttribute("속성"); </li>
+		<li>속성값 저장하기: request.setAttribute("속성", 값); </li>
+	</ul>
 </body>
 </html>
