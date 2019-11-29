@@ -57,3 +57,51 @@ JSP 기본객체
 		7) application	모든 페이지가 공유할 데이터를 담고 있는 객체
 		8) config		서블릿 설정 시 데이터 초기화 정보를 담고 있는 객체
 		9) exception	예외 처리 객체
+		
+4가지 영역
+	1. 데이터가 저장되는 4가지 영역(객체)가 있다.
+	2. 영역에 따라 데이터가 유지되는 생명주기(life cycle)가 다르다.
+	3. 4가지 영역(객체)
+		1) pageContext 객체
+			(1) 하나의 페이지를 처리할 때 사용하는 영역
+			(2) page 영역
+			(3) 해당 페이지를 벗어나면 데이터가 삭제됨.
+		2) request 객체
+			(1) 하나의 요청을 처리할 때 사용하는 영역
+			(2) request 영역
+			(3) response 하면 데이터가 삭제됨. 
+		3) session 객체
+			(1)	하나의 웹 브라우저에서 사용하는 영역
+			(2) session 영역
+			(3) 웹 브라우저를 종료하면 데이터 삭제
+		4) application 객체
+			(1) 하나의 웹 애플리케이션에서 사용하는 영역
+			(2) application 영역
+			(3) 웹 애플리케이션을 종료하면 데이터가 삭제됨.
+	4. 4가지 영역에 데이터 저장하기/불러오기
+		1) 데이터 저장하기
+			(1) pageContext.setAttribute("속성","값");
+			(2) request.setAttribute("속성","값");
+			(3) session.setAttribute("속성","값");
+			(4) application.setAttribute("속성", "값");
+		2) 데이터 불러오기
+			(1) (String)pageContext.setAttribute("속성");   저장한 타입으로 캐스팅.
+				String a = (String)pageContext.setAttribute("속성"); 
+			(2) request.getAttribute("속성");
+			(3) session.getAttribute("속성");
+			(4) application.getAttribute("속성");
+			
+세션 (session)
+	1. 세션에 데이터 저장하기              : session.setAttribute("속성","값");
+	2. 세션에 저장된 데이터 불러오기    : session.getAttribute("속성");
+	3. 세션에 저장된 데이터 삭제하기    : session.removeAttribute("속성");
+	4. 세션에 저장된 데이터 모두삭제 	: session.invalidate();
+	5. 10분 후 세션에 저장된 정보 소멸시키기
+		1) web.xml 에 작성하기
+		2) 작성 방법
+			<web-app>
+			<session-config>
+				<session-timeout>10</session-timeout>
+			</session-config>
+			</web-app>
+				
