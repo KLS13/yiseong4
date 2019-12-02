@@ -5,16 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	function forward(){
-		location.href = "/03_jsp/Test/forward_02.jsp";
-	}
-</script>
 </head>
 <body>
-	<div>첫번째 수 : <input type="text" name="num1"></div>
-	<div>두번째 수 : <input type="text" name="num2"></div>
-	<input type="button" value="입력" onclick="forward()" />
+
+	<form action="/2019.12.01/forward_02.jsp">
+		<% if ( request.getParameter("num1") == null && request.getParameter("num2") == null ) { %>
+			첫 번째 수 : <input type="text" name="num1" /><br />
+			두 번재 수 : <input type="text" name="num2" /><br />
+		<% } else { %>
+			첫 번째 수 : <input type="text" name="num1" value="<%=request.getParameter("num1") %>" /><br />
+			두 번재 수 : <input type="text" name="num2" value="<%=request.getParameter("num2") %>" /><br />
+		<% } %>
+		<input type="submit" value="입력" />
+	</form>
 	
 </body>
 </html>
