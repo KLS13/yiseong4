@@ -1,0 +1,36 @@
+Action Tag
+
+	1. 페이지 관련 Action Tag
+	
+		1) forward 액션
+			<jsp:forward page="이동할 페이지"></jsp:forward>
+			<jsp:forward page="이동할 페이지" />
+		
+		2) include 액션
+			<jsp:include page="포함할 페이지">
+				<jsp:param name="파라미터이름" value="파라미터값" /> 
+				<jsp:param name="파라미터이름" value="파라미터값" /> 
+				<jsp:param name="파라미터이름" value="파라미터값" /> 
+			</jsp:include>
+			
+		3) include 지시어 vs include 액션
+			(1) include 지시어 <%@ include file="포함할 페이지" %>, 정적페이지 포함
+			(2) include 액션 <jsp:include page="포함할 페이지" />, 동적페이지 포함
+			
+	2. 자바빈(java bean) 관련 태그
+		1) <jsp:useBean> : JSP 페이지에서 자바빈을 사용하고자 할 때   - object
+		2) <jsp:setProperty> : 자바빈의 property 값을 set(저장,전달) 할 때  - setter
+		3) <jsp:getProperty> : 자바빈의 property 값을 get(얻기,읽기) 할 때  - getter
+	
+	3. 자바빈이란?
+		1) 자바빈 개발 규약에 따라서 작성된 자바 클래스
+		2) 개발자가 직접 만들어서 사용하는 클래스
+		3) jsp에서는 표준액션태그로 처리
+		4) 자바빈 개발 규약
+			(1) 반드시 특정 패키지에 작성한다.   ( default 패키지를 사용할 수 없다. )
+			(2) 필드 + 생성자 + getter/setter 로 구성된다.
+			(3) 필드는 반드시 private 으로 작성한다.
+			(4) 생성자는 반드시 디폴트 생성자를 직접 작성해야 한다. (  <jsp:useBean> 에서 사용  )
+			(5) getter/setter 는 반드시 public 으로 작성한다.
+		
+	
