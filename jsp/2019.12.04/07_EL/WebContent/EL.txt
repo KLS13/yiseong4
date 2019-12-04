@@ -1,0 +1,9 @@
+1. EL (Expression Language)
+
+	1. JSP에서 사용하는 새로운 스크립트 언어
+	2. 표현식을 대체하는 역할 ( <%= 변수값 %>, <%= 계산식 %>, <%=함수 () %> )
+	3. 4가지 영역(객체)에서 사용
+		pageContext, request, session, application
+	4. EL 표현 방식
+		<%= 변수값 %> -> ${변수값} 
+	5. EL 내장객체 중 파라미터를 사용하는 경우  param, paramValues 를 사용
