@@ -1,0 +1,34 @@
+커넥션 풀 ( Connection Pool )
+
+	1. 기존 Connection 동작 정리
+		1) Connection conn = getConnection();  커넥션의 생성
+		2) DB접근 -> SQL 전송 -> 결과 리턴
+		3) conn.close();	커넥션의 소멸
+		
+	2. 커넥션 풀의 도입
+		1) Connection 객체(conn)를 미리 만들어 놓는다.
+		2) 요청이 발생되면 만들어진 conn 사용 후 반납
+		3) Connection 객체를 보관하는 장소를 Connection Pool 이라고 한다.
+		4) Connection Pool 을 관리하기 위한 DataSource 객체를 별도로 사용한다.
+		
+	3. DataSource 객체
+		1) Connection Pool 의 Connection 객체를 관리한다.
+		2) JNDI 서버를 통해서 사용한다.
+	
+	4. 필요한 외부 라이브러리
+		1) DBCP
+		2) Pool
+		3) Collections
+		
+	5. Connection Pool 이용 과정
+		1) jar 파일 설치 - WEB-INF/lib
+		2) DBCP 정보 설정
+			(1) META-INF/ context.xml 생성
+			(2) <Resource> 태그 작성
+				- name  - url 
+				- type	- username 등의 속성을 작성
+		3)  DAO의 getConnection 을 DataSource 객체의 getConnection 으로 변경
+		
+		
+		 
+	
