@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.green">
+
+	<!--
+		select 태그 속성
+		1. id : id 를 통해서 sql 문 선택 (임의로 결정)
+		2. parameterType : 매개변수 타입
+		3. resultType : 리턴타입
+	-->
+
+	<!-- 1. 전체 검색 -->
+	<select id="select_all" resultType="com.mybatis.GreenDto">
+		select * from green order by idx
+	</select>
+	
+	<!-- 2. 아이디 검색 -->
+	<select id="select_by_id" resultType="com.mybatis.GreenDto" parameterType="String">
+		select * from green where id = #{id}
+	</select>
+	
+	
+	<!--
+		insert, update, delete 태그 속성
+		1. id : id 를 통해서 sql 문 선택 (임의로 결정)
+		2. parameterType : 매개변수 타입
+		3. resultType : int 형으로 정해져 있기 때문에 사용하지 않음
+	-->
+	
+	<!-- 3. 회원 삽입 -->
+	<insert id="insert" parameterType="com.mybatis.GreenDto">
+		insert into green values 
+		(green_seq.nextval, #{id}, #{pw}, #{name}, #{age}, #{addr}, sysdate)
+	</insert>
+	
+	<!-- 4. 회원 삭제 -->
+	<delete id="remove" parameterType="com.mybatis.GreenDto">
+		delete from green where id = #{id} and pw = #{pw}
+	</delete>
+	
+	
+	<!-- 5. 회원 수정 -->
+	<update id="update" parameterType="com.mybatis.GreenDto">
+		update green set pw=#{pw},name=#{name},age=#{age},addr=#{addr} where id = #{id} and pw = #{pw}
+	</update>
+	
+	<select id="select_by_dto" resultType="com.mybatis.GreenDto" parameterType="String">
+		select * from green where id = #{id} and pw = #{pw}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>
