@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.bbs">
+	<insert id="insert_bbs" parameterType="com.koreait.mybatis.BDto">
+		INSERT INTO BBS_T
+		VALUES
+		(BBS_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{pw}, 0, #{ip}, #{filename}, SYSDATE )
+	</insert>
+	
+	<insert id="insert_join" parameterType="com.koreait.mybatis.BDto">
+		INSERT INTO JOIN
+		VALUES
+		(#{writer}, #{pw}, 0)
+	</insert>
+	<!-- begin부터 end까지 게시물 반환하기 -->
+	<!-- 1. 오라클 테이블은 레코드의 순서를 번호로 반환하는 rownum 필드가 있다 -->
+	<!-- 2. rownum 필드는 가상 필드이므로 실제 필드이름을 임의로 부여해서 사용할 수 있다. -->
+	
+	<!-- 작업순서 -->
+	<!-- 1. b_idx를 기준으로 오름(내림)차순 정렬한다. -->
+	<!-- 2. 자동으로 매겨지는 순번(rownum)을 1번 결과에 추가한다. -->
+	<!-- 3. 2번의 결과에 where절 처리를 한다. -->
+	
+	<!-- 가장 안쪽 괄호부터 해석하고 처리한다. -->
+	<select id="list_bbs" parameterType="Map" resultType="com.koreait.mybatis.BDto">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM BBS_T ORDER BY B_IDX DESC) A)
+		WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	
+	<select id="list_login" resultType="com.koreait.mybatis.JDto">
+		SELECT * FROM JOIN WHERE WRITER=#{writer}, PW=#{pw}
+	</select>
+	
+	<select id="bbs_by_idx" resultType="com.koreait.mybatis.BDto" parameterType="int">
+		SELECT * FROM BBS_T WHERE B_IDX = #{b_idx}	
+	</select>
+	
+	<update id="update_bbs" parameterType="com.koreait.mybatis.BDto">
+		UPDATE BBS_T SET
+				TITLE = #{title},
+				CONTENT = #{content},
+				FILENAME = #{filename},
+				IP = #{ip} 
+			WHERE B_IDX = #{b_idx} 
+	</update>
+	
+	<delete id="remove_bbs"  parameterType="int">
+		DELETE FROM BBS_T WHERE B_IDX = #{b_idx}
+	</delete>
+
+	<update id="update_hit" parameterType="com.koreait.mybatis.BDto">
+		UPDATE BBS_T SET
+				HIT = #{hit}
+			WHERE B_IDX = #{b_idx}
+	</update>
+
+	<select id="total_record" resultType="int">
+		SELECT COUNT(*) FROM BBS_T
+	</select>
+
+	<!-- 
+		댓글 처리
+	 -->
+	 <insert id="insert_comment" parameterType="com.koreait.mybatis.BDto">
+	 	INSERT INTO COMMENT_T
+	 		VALUES
+	 			( COMMENT_SEQ.NEXTVAL, #{writer}, #{content},#{pw},#{ip}, SYSDATE, #{b_idx})
+	 </insert>
+	 
+	 <select id="list_comment" parameterType="int" resultType="com.koreait.mybatis.CDto">
+	 	SELECT * FROM COMMENT_T
+	 	WHERE B_IDX = #{b_idx}
+	 </select>
+	 
+	 <delete id="remove_comment" parameterType="int">
+	 	DELETE FROM COMMENT_T 
+	 	WHERE C_IDX = #{c_idx}
+	 </delete>
+	</mapper>
+
+
+
+
+
+
