@@ -1,0 +1,9 @@
+MVC Pattren
+
+1. M : Model 비즈니스 로직 / DB 처리 , JAVA 파일 (pojo : 순수 자바)
+2. V : View, 화면 처리, JSP 파일
+3. C : Controller, 흐름제어, Servlet 파일
+
+기본 흐름
+
+화면(jsp) 요청 --> 컨트롤러 --> 요청에 맞는 Model 호출
