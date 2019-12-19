@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.client">
+
+	<select id="select_all_client" resultType="com.koreait.dto.ClientDto">
+		SELECT
+			*
+		FROM
+			CLIENT_T
+	</select>
+	
+	<select id="select_client_by_region" resultType="com.koreait.dto.ClientDto" parameterType="String">
+		SELECT
+			*
+		FROM
+			CLIENT_T
+		WHERE
+			CADDR LIKE '%' || #{cAddr} || '%'
+	</select>
+	
+	<select id="select_client_by_name" resultType="com.koreait.dto.ClientDto" parameterType="String">
+		SELECT
+			*
+		FROM
+			CLIENT_T
+		WHERE
+			CNAME LIKE '%' || #{cName} || '%'
+	</select> 
+
+</mapper>

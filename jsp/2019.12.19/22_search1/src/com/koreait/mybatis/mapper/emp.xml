@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.emp">
+
+	<select id="select_Emp_by_dept" resultType="com.koreait.dto.EmpDto" parameterType="String">
+		SELECT * FROM EMP_T WHERE empDeptNo = #{empDeptNo}
+	</select>
+	
+	<select id="select_all_emp" resultType="com.koreait.dto.EmpDto">
+		SELECT
+			*
+		FROM
+			EMP_T
+	</select>
+
+</mapper>
