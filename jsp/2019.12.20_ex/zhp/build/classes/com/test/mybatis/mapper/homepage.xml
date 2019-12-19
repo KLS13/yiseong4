@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.test.mybatis.mapper.homepage">
+
+	<select id="select_login" resultType="com.test.dto.homepageDto" parameterType="com.test.dto.homepageDto">
+		SELECT
+			*
+		FROM
+			HOMEPAGE
+		WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<insert id="insert_join" parameterType="com.test.dto.homepageDto">
+		INSERT INTO HOMEPAGE VALUES ( #{id}, #{pw}, #{name}, 0);
+	</insert>
+
+</mapper>
