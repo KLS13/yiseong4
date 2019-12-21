@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.guestbook">
+
+	<select id="select_all" resultType="com.koreait.dto.GuestbookDto">
+		SELECT
+			*
+		FROM
+			GUESTBOOK
+		ORDER BY
+			IDX DESC
+	</select>
+
+	<insert id="insert" parameterType="com.koreait.dto.GuestbookDto">
+		INSERT INTO
+			GUESTBOOK
+		VALUES
+			(GUESTBOOK_SEQ.NEXTVAL, #{writer}, #{email}, #{pw}, #{filename}, #{title}, #{content}, SYSDATE)
+	</insert>
+	
+	<select id="select_by_idx" resultType="com.koreait.dto.GuestbookDto" parameterType="int">
+		SELECT
+			*
+		FROM
+			GUESTBOOK
+		WHERE
+			IDX = #{idx}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			GUESTBOOK
+		WHERE
+			IDX = #{idx}
+	</delete>
+	
+	<update id="update" parameterType="com.koreait.dto.GuestbookDto">
+		UPDATE
+			GUESTBOOK
+		SET
+			WRITER = #{writer}, TITLE = #{title}, EMAIL = #{email}, CONTENT = #{content} 
+		WHERE
+			IDX = #{idx}
+	</update>
+
+</mapper>
