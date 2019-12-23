@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.bbs">
+
+	<select id="select_all_bbs" resultType="com.koreait.dto.BDto">
+		SELECT
+			*
+		FROM
+			BBS_T
+	</select>
+	
+	<select id="select_by_idx" resultType="com.koreait.dto.BDto" parameterType="int">
+		SELECT
+			*
+		FROM
+			BBS_T
+		WHERE
+			B_IDX = #{b_idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.koreait.dto.BDto">
+		INSERT INTO
+			BBS_T
+		VALUES
+			(BBS_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{pw}, 0, #{ip}, #{filename}, SYSDATE)
+	</insert>
+
+	<update id="update_with_file" parameterType="com.koreait.dto.BDto">
+		UPDATE BBS_T SET WRITER=#{writer} , TITLE = #{title}, CONTENT = #{content}, IP =#{ip} , FILENAME = #{filename}
+		WHERE B_IDX= #{b_idx}
+	</update>
+	
+	
+	<update id="update_without_file" parameterType="com.koreait.dto.BDto">
+		UPDATE BBS_T SET WRITER=#{writer} , TITLE = #{title}, CONTENT = #{content}, IP =#{ip}
+		WHERE B_IDX= #{b_idx}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+		DELETE FROM BBS_T WHERE B_IDX = #{b_idx}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
