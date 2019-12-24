@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.bbs">
+
+	<select id="select_by_map" parameterType="Map" resultType="com.koreait.dto.BDto">
+		SELECT
+			*
+		FROM
+			(SELECT ROWNUM R_NUM, a.* FROM (SELECT * FROM BBS_T ORDER BY B_IDX DESC) a)
+		WHERE
+			R_NUM BETWEEN #{begin} AND #{end}
+		</select>
+	
+	<select id="select_by_idx" resultType="com.koreait.dto.BDto" parameterType="int">
+		SELECT
+			*
+		FROM
+			BBS_T
+		WHERE
+			B_IDX = #{b_idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.koreait.dto.BDto">
+		INSERT INTO
+			BBS_T
+		VALUES
+			(BBS_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{pw}, 0, #{ip}, #{filename}, SYSDATE)
+	</insert>
+	
+	<update id="update_with_file" parameterType="com.koreait.dto.BDto">
+		UPDATE
+			BBS_T
+		SET
+			WRITER = #{writer}, 
+			TITLE = #{title}, 
+			CONTENT = #{content}, 
+			IP = #{ip}, 
+			FILENAME = #{filename}
+		WHERE
+			B_IDX = #{b_idx}
+	</update>
+	
+	<update id="update_without_file" parameterType="com.koreait.dto.BDto">
+		UPDATE
+			BBS_T
+		SET
+			WRITER = #{writer}, 
+			TITLE = #{title}, 
+			CONTENT = #{content}, 
+			IP = #{ip} 
+		WHERE
+			B_IDX = #{b_idx}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+		DELETE
+		FROM
+			BBS_T
+		WHERE
+			B_IDX = #{b_idx}
+	</delete>
+	
+	<select id="total_count_of_bbs" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			BBS_T
+	</select>
+
+	<update id="update_hit" parameterType="com.koreait.dto.BDto">
+		UPDATE
+			BBS_T
+		SET
+			HIT = #{hit}
+		WHERE
+			B_IDX = #{b_idx}
+	</update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
