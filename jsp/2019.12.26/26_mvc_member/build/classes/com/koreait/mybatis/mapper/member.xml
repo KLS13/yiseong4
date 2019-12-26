@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.member">
+
+	<select id="select_by_mId_mPw" parameterType="com.koreait.dto.MemberDto" resultType="com.koreait.dto.MemberDto">
+		SELECT
+			*
+		FROM
+			MEMBER_T
+		WHERE
+			MID = #{mId} AND MPW = #{mPw}
+	</select>
+
+	<select id="select_by_mEmail" parameterType="String" resultType="com.koreait.dto.MemberDto">
+		SELECT
+			*
+		FROM
+			MEMBER_T
+		WHERE
+			MEMAIL = #{mEmail}
+	</select>
+
+	<select id="select_by_mId" parameterType="String" resultType="com.koreait.dto.MemberDto">
+		SELECT
+			*
+		FROM
+			MEMBER_T
+		WHERE
+			MID = #{mId}
+	</select>
+	
+	<update id="update_mPw" parameterType="com.koreait.dto.MemberDto">
+		UPDATE
+			MEMBER_T
+		SET
+			MPW = #{mPw}
+		WHERE
+			MID = #{mId}
+	</update>
+	
+
+</mapper>
+
+
+
+
+
+
