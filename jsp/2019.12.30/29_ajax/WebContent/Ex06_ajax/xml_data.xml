@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE people>
+
+<people>
+
+	<person>
+		<name>alice</name>
+		<age>20</age>
+	</person>
+
+	<person>
+		<name>lala</name>
+		<age>21</age>
+	</person>
+
+	<person>
+		<name>laliga</name>
+		<age>22</age>
+	</person>
+
+	<person>
+		<name>james</name>
+		<age>23</age>
+	</person>
+
+	<person>
+		<name>navi</name>
+		<age>24</age>
+	</person>
+
+</people>

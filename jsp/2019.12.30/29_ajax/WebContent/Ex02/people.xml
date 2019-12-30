@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE people>
+<people>
+
+	<!-- 1. name 태그, age 태그 --><!-- getElementsByTagName 사용이 가능하다. -->
+	<person>
+		<name>alice</name>
+		<age>20</age>
+	</person>
+	<person>
+		<name>james</name>
+		<age>21</age>
+	</person>
+	
+	<!-- 2. name 속성, age 속성 --><!-- getElementsByTagName 사용이 불가능하다. -->
+	<person name="david" age="22" />
+	<person name="samanda" age="23" />
+
+</people>
