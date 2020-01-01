@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:choose>
-	<c:when test="${result eq 0}">
+	<c:when test="${result gt 0}">
 		<script>
 		alert("구매완료");
 		</script>
@@ -20,6 +20,6 @@ ${loginDto.mPoint}점 보유하고 있습니다. <br />
 
 <h1>구매내역</h1> <br />
 ${item} 구매완료 <br />
-구매 포인트 : ${mPoint}점 <br />
+구매 포인트 : ${mDto.mPoint}점 <br />
 
-${loginDto.mPoint} - ${mPoint} = ${loginDto.mPoint - mPoint}점
+${loginDto.mPoint} - ${mDto.mPoint} = ${loginDto.mPoint - mDto.mPoint}점
