@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.member">
+
+	<select id="select_by_mId_mPw" parameterType="com.koreait.dto.MemberDto" resultType="com.koreait.dto.MemberDto">
+		SELECT
+			*
+		FROM
+			MEMBER_T
+		WHERE
+			MID = #{mId} AND MPW = #{mPw}
+	</select>
+	
+	<update id="updatePoint" parameterType="String">
+		UPDATE MEMBER_T SET MPOINT = MPOINT + 50 WHERE MID= #{mId}
+	</update>
+
+	<select id="select_by_mEmail" parameterType="String" resultType="com.koreait.dto.MemberDto">
+		SELECT
+			*
+		FROM
+			MEMBER_T
+		WHERE
+			MEMAIL = #{mEmail}
+	</select>
+
+	<select id="select_by_mId" parameterType="String" resultType="com.koreait.dto.MemberDto">
+		SELECT
+			*
+		FROM
+			MEMBER_T
+		WHERE
+			MID = #{mId}
+	</select>
+	
+	<update id="update_mPw" parameterType="com.koreait.dto.MemberDto">
+		UPDATE
+			MEMBER_T
+		SET
+			MPW = #{mPw}
+		WHERE
+			MID = #{mId}
+	</update>
+	
+	<insert id="insert" parameterType="com.koreait.dto.MemberDto">
+		INSERT INTO MEMBER_T
+		VALUES
+		(MEMBER_SEQ.NEXTVAL, #{mId}, #{mPw}, #{mName}, #{mEmail}, #{mPhone}, SYSDATE , 0)
+	</insert>
+	
+	<delete id="leave" parameterType="String">
+		DELETE FROM MEMBER_T WHERE MID = #{mId}	
+	</delete>
+	
+	<update id="point_minus" parameterType="com.koreait.dto.MemberDto">
+		UPDATE MEMBER_T SET MPOINT = MPOINT-#{mPoint} WHERE MID = #{mId}
+	</update>
+	
+</mapper>
