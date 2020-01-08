@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- spring bean configuration file 객체생성 -->
+
+<!-- 빈 생성 -->
+<!-- Calculator calc = new Calulator(); -->
+<!-- 클래스    아이디 -->
+	<bean id="calc" class="com.koreait.spring.Calculator" />
+	
+<!-- 빈 생성 -->
+<!-- MyCalculator myCalculator = new MyCalulator(); 
+	 myCalculator.setNum1(10);
+	 myCalculator.setNum2(2);
+	 myCalculator.setCalculator(calc);
+-->	
+	<bean id="myCalculator" class="com.koreait.spring.MyCalculator">
+		<property name="num1">
+			<value>10</value>
+		</property>
+		
+		<property name="num2">
+			<value>2</value>
+		</property>
+		
+		<property name="calculator">  
+			<ref bean="calc"></ref>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 빈 생성 -->
+	<!-- 1. 파라미터로 전달되는 필드의 순서대로 construcor-arg 설정한다. -->
+	<!-- 2. 한번에 한 필드씩만 consructor-arg 로 설정한다 -->
+	<!-- 3. <constructor-arg value="값" /> 도 가능하다. -->
+	
+	<!-- property 방식과  constructor-arg 방식   "property" 방식이 더 좋다.-->
+	<bean id="human" class="com.koreait.spring.Person">
+		<constructor-arg>
+			<value>alice</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>20</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>010-1234-5678</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>서울</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="pInfo" class="com.koreait.spring.PersonInfo">
+		<constructor-arg>
+			<ref bean="human" />
+		</constructor-arg>
+	</bean>
+</beans>
