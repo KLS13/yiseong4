@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="stu" class="com.test.Student">
+		<property name="name">
+			<value>lala</value>
+		</property>
+		<property name="score">
+			<value>84</value>
+		</property>
+		<property name="grade">
+			<value>B</value>
+		</property>
+		<property name="addr">
+			<value>서울시</value>
+		</property>
+	</bean>
+	
+	<bean id="myStu" class="com.test.StudentInfo">
+		<property name="student">
+			<ref bean="stu"></ref>
+		</property>
+	</bean>
+	
+	
+	<bean id="stu2" class="com.test.Student">
+		<property name="name">
+			<value>coco</value>
+		</property>
+		<property name="score">
+			<value>91</value>
+		</property>
+		<property name="grade">
+			<value>A</value>
+		</property>
+		<property name="addr">
+			<value>인천시</value>
+		</property>
+	</bean>
+	
+	<bean id="myStu2" class="com.test.StudentInfo">
+		<property name="student">
+			<ref bean="stu2"></ref>
+		</property>
+	</bean>
+	
+
+</beans>
