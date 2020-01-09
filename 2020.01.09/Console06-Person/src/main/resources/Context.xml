@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="person1" class="com.koreait.spring.Person">
+		<constructor-arg>
+			<value>alice</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>20</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>010-1234-5678</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>서울시</value>
+		</constructor-arg>
+	</bean>	
+	
+	<bean id="person2" class="com.koreait.spring.Person">
+		<constructor-arg value="coco"/>
+		<constructor-arg value="22"/>
+		<constructor-arg value="010-5678-1234"/>
+		<constructor-arg value="시흥시"/>
+	</bean>
+		
+	<bean id="personInfo" class="com.koreait.spring.PersonInfo">
+		<constructor-arg>
+			<ref bean="person1"></ref>
+		</constructor-arg>
+	</bean>	
+	
+
+</beans>

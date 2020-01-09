@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- List -->
+	<bean id="listBean" class="com.koreait.spring.ListClass">
+		<property name="myList">
+			<list>
+				<value>망고</value>
+				<value>딸기</value>
+				<value>포도</value>
+				<value>수박</value>
+				<value>메론</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Set -->
+	<bean id="setBean" class="com.koreait.spring.SetClass">
+		<property name="mySet">
+			<set>
+				<value>런던</value>
+				<value>밴쿠버</value>
+				<value>파리</value>
+				<value>런던</value>
+				<value>베를린</value>
+			</set>
+		</property>
+	</bean>
+	
+	<!-- Map -->
+	<bean id="mapBean" class="com.koreait.spring.MapClass">
+		<property name="myMap">
+			<map>
+				<entry key="name" value="alice"/>
+				<entry key="age" value="21"/>
+				<entry key="phone" value="010-2074-9964"/>
+				<entry key="addr" value="seoul"/>
+			</map>
+		</property>
+	</bean>
+</beans>
