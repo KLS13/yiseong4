@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="game1" class="com.test.Game">
+	<property name="name" value="오버워치"/>
+	<property name="team" value="CoCo"/>
+	<property name="torunament" value="컨텐더스"></property>
+	<property name="manager" value="자바"/>
+</bean>
+
+<bean id="game2" class="com.test.Game">
+	<constructor-arg value="오버워치" ></constructor-arg>
+	<constructor-arg value="그리핀" ></constructor-arg>
+	<constructor-arg value="오버워치리그" ></constructor-arg>
+	<constructor-arg value="파이썬" ></constructor-arg>
+</bean>
+
+<bean id="myGame" class="com.test.GameInfo">
+	<property name="game">
+		<ref bean="game1"/>
+	</property>
+</bean>
+
+
+
+</beans>

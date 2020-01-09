@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="listTest" class="com.test.ListEx">
+	<property name="list">
+		<list>
+			<value>오버워치</value>
+			<value>오버워치2</value>
+			<value>롤</value>
+			<value>서든어택</value>
+			<value>피파</value>
+		</list>
+	</property>
+</bean>
+
+<bean id="setTest" class="com.test.SetEx">
+	<property name="set">
+		<set>
+			<value>맨유</value>
+			<value>토트넘</value>
+			<value>PSG</value>
+			<value>바르셀로나</value>
+			<value>리버풀</value>
+			<value>아스널</value>
+		</set>
+	</property>
+</bean>
+
+<bean id="mapTest" class="com.test.MapEx">
+	<property name="map">
+		<map>
+			<entry key="영국" value="맨유"/>
+			<entry key="포루투갈" value="스포르팅"/>
+			<entry key="스페인" value="레알마드리드"/>
+			<entry key="독일" value="도르트문트"/>
+			<entry key="프랑스" value="PSG"/>
+			<entry key="이탈리아" value="유벤투스"/>
+		</map>
+	</property>
+</bean>
+
+</beans>
