@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="middleFriend" class="com.koreait.spring.Friend">
+		<constructor-arg>
+			<value>왕경태</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>오영심</value>
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="highFriend" class="com.koreait.spring.Friend" c:boyFriendName="왕경태" c:girlFriendName="오영심"/>
+</beans>

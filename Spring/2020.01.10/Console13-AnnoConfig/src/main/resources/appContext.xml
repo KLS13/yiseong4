@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- AnnoConfig.java 내용이 appContext.xml 에서 작성한 것처럼 처리. -->
+	<!-- 그러면 모든 Bean을 appContext.xml에서 만든것으로 처리할 수 있따. -->
+	<!-- AbstractApplicationContext ctx 를 이용해 getBean() 호출 -->
+
+	<!-- java를 XML에 흡수시키는 방식 -->
+	<!-- 1. 화면 하단 Namespaces 에서 context를 체크 -->
+	<!-- 2. <context:annotation-config /> -->
+	<!-- 3. 흡수할 AnnoConfig.java를 <bean class="com.~~~~~.AnnoConfig"/> -->
+	<context:annotation-config />
+		<bean class="com.koreait.spring.AnnoConfig"/>
+
+
+	<bean id="person2" class="com.koreait.spring.Person">
+		<property name="name" value="laliga"/>
+		<property name="hobbies">
+			<list>
+				<value>한식</value>
+				<value>중식</value>
+				<value>분식</value>
+				<value>일식</value>
+				<value>양식</value>
+			</list>
+		</property>
+		<property name="height" value="167.4"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="gugu" class="com.koreait.spring.InputInfo"/>
+
+<bean id="myGugu" class="com.koreait.spring.Gugudan">
+	<property name="num1" value="2"/>
+	<property name="num2" value="8"/>
+	<property name="limit1" value="3"/>
+	<property name="limit2" value="7"/>
+	<property name="info">
+		<ref bean="gugu"/>
+	</property>
+</bean>
+
+</beans>

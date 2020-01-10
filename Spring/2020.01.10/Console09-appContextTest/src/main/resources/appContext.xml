@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="person1" class="com.koreait.spring.PersonInfo">
+		<property name="name" value="alice"/>
+		<property name="weight" value="55.5"/>
+		<property name="height" value="165.5"/>
+		<property name="bmiCalculator">
+			<ref bean="myPerson"></ref>
+		</property>
+		<property name="hobbies">
+			<list>
+				<value>게임</value>
+				<value>영화</value>
+				<value>독서</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="myPerson" class="com.koreait.spring.BMICalculator">
+		<property name="normal" value="20"/>
+		<property name="over" value="25"/>
+		<property name="obesity" value="30"/>
+	</bean>
+
+</beans>
