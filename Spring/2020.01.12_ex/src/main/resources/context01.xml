@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="grade1" class="Test01.GradeInfo">
+	<property name="name" value="CoCo"/>
+	<property name="kor" value="84"/>
+	<property name="eng" value="64"/>
+	<property name="mat" value="89"/>
+	<property name="average">
+		<ref bean="myGrade"></ref>
+	</property>
+</bean>
+
+<bean id="myGrade" class="Test01.Average">
+	<property name="score1" value="90"></property>
+	<property name="score2" value="80"></property>
+	<property name="score3" value="70"></property>
+</bean>
+
+</beans>

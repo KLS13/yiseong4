@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<bean id="family1" class="Test02.Family">
+	<property name="papaName">
+		<value>김철수</value>
+	</property>
+	<property name="mamaName">
+		<value>박영희</value>
+	</property>
+</bean>
+
+<!-- 아래 Namespaces 탭에서 p 를 체크하고 할 것. -->
+<!-- p:   /   p == property  -->
+<bean id="family2" class="Test02.Family"
+p:mamaName="lala" p:papaName="CoCo"/>
+
+</beans>
