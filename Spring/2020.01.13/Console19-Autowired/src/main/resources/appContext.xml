@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<!-- LgTV 에 BoseSpeaker 달기 (기존 방식) -->
+	
+	<!-- setter 를 이용해서 <bean id="bose"> 인 빈을 주입 -->
+	<!-- 
+	<bean id="bose" class="com.koreait.spring.BoseSpeaker" />
+	<bean id="lgtv" class="com.koreait.spring.LgTV">
+		<property name="speaker" ref="bose" />
+	</bean>
+	-->
+	
+	<!-- 위 주입 과정을 클래스에서 직접 진행할 수 있다. -->
+	
+	<!-- LgTV 에 BoseSpeaker 달기 (새로운 방식) -->
+	<!-- 1. BoseSpeaker 클래스에 @Component("bose") 를 달아준다.(내가 bose 다.) -->
+	<!-- 2. LgTV 클래스의 private Speaker speaker; 필드에 두 개의 애너테이션을 달아준다. -->
+	<!--    1) @Qualifier("bose") : bose 라는 빈을 -->
+	<!--    2) @Autowired : 자동으로 주입해 주세요. -->
+	<!-- 3. 애너테이션 활성화를 한다. -->
+	<!--    1) 화면 하단 Namespaces 에서 context 를 체크한다. -->
+	<!--    2) <context:annotation-config /> 를 작성한다. -->
+	
+	<context:annotation-config />
+	<bean id="bose" class="com.koreait.spring.BoseSpeaker" />
+	<bean id="lgtv" class="com.koreait.spring.LgTV" />
+	
+	
+	<!-- SamsungTV 에 AppleSpeaker 달기 -->
+	<bean id="apple" class="com.koreait.spring.AppleSpeaker" />
+	<bean id="samsungtv" class="com.koreait.spring.SamsungTV" />
+
+</beans>

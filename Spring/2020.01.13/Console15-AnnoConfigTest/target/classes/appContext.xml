@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:annotation-config />
+	<bean class="com.koreait.spring.AnnoConfig" />
+
+	<bean id="gugu" class="com.koreait.spring.Gugudan">
+		<property name="startDan" value="2" />
+		<property name="endDan" value="9" />
+		<property name="startNum" value="1" />
+		<property name="endNum" value="9" />
+		<property name="calculator" ref="calc" />
+	</bean>
+
+</beans>
