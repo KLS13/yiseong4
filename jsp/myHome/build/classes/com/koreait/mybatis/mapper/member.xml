@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.member">
+
+	<insert id="insert_join" parameterType="com.koreait.dto.Mdto">
+		INSERT INTO MEMBER VALUES
+		( #{mId}, #{mPw}, #{mName}, #{mEmail}, #{mPhone}, #{mAddress}, SYSDATE, SYSDATE, 0, 100)
+	</insert>
+	
+	<select id="select_by_mId" parameterType="String" resultType="com.koreait.dto.Mdto">
+		SELECT * FROM MEMBER WHERE MID = #{mId}
+	</select>	
+	
+	<select id="select_login" parameterType="com.koreait.dto.Mdto" resultType="com.koreait.dto.Mdto">
+		SELECT * FROM MEMBER WHERE MID = #{mId} AND MPW = #{mPw}
+	</select>
+	
+	<update id="update_point" parameterType="String">
+		UPDATE MEMBER SET MPOINT=mPoint+100 WHERE MID=#{mId} AND TO_CHAR(MLOGIN, 'YYMMDD') != TO_CHAR(SYSDATE, 'YYMMDD')
+	</update>
+	
+	<delete id = "delete_member" parameterType="String">
+		DELETE FROM MEMBER WHERE MID = #{mId}
+	</delete>
+	
+	<update id="update_member" parameterType="com.koreait.dto.Mdto">
+		UPDATE MEMBER SET MPW = #{mPw}, MNAME=#{mName}, MEMAIL = #{mEmail}, MPHONE=#{mPhone}, MADDRESS=#{mAddress}
+		WHERE MID = #{mId}
+	</update>
+</mapper>
