@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <jsp:include page="/layout/header.jsp">
 	<jsp:param value="회원가입 페이지" name="title" />
@@ -66,7 +69,7 @@ td:nth-of-type(2) {
 		}); // end keyup (end 아이디 중복체크)
 
 		$("#joinBtn").click(function() {
-			
+
 			$.ajax({
 				url : "/myHome/ajaxJoinLogic.me",
 				type : "POST",
@@ -89,16 +92,61 @@ td:nth-of-type(2) {
 			}); // end ajax
 		}); // end click
 		// 3. 입력 취소
-		$("#cleanBtn").click(function(){
-			$("input[text], input[password]").each(function(){
+		$("#cleanBtn").click(function() {
+			$("input[text], input[password]").each(function() {
 				$(this).val("");
 			});
 			$("#idCheckResult").val("");
 			$("#mId").focus();
 		}); // end click (end 입력 취소)
 		
+		$(function() {
+			$('#postBtn').click(function() {
+				execDaumPostcode();
+			});
+			function execDaumPostcode() {
+				new daum.Postcode(
+						{
+							oncomplete : function(data) {
+								// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+								// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+								// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+								var fullAddr = ''; // 최종 주소 변수
+								var extraAddr = ''; // 조합형 주소 변수
+								// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+								if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+									fullAddr = data.roadAddress;
+								} else { // 사용자가 지번 주소를 선택했을 경우(J)
+									fullAddr = data.jibunAddress;
+								}
+								// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+								if (data.userSelectedType === 'R') {
+									//법정동명이 있을 경우 추가한다.
+									if (data.bname !== '') {
+										extraAddr += data.bname;
+									}
+									// 건물명이 있을 경우 추가한다.
+									if (data.buildingName !== '') {
+										extraAddr += (extraAddr !== '' ? ', '
+												+ data.buildingName
+												: data.buildingName);
+									}
+									// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+									fullAddr += (extraAddr !== '' ? ' ('
+											+ extraAddr + ')' : '');
+								}
+								// 우편번호와 주소 정보를 해당 필드에 넣는다.
+								document.getElementById('mAddress').value = data.zonecode; //5자리 새우편번호 사용
+								document.getElementById('mAddress').value += "\t"
+										+ fullAddr;
+
+								// 커서를 상세주소 필드로 이동한다.
+								document.getElementById('mAddressr').focus();
+							}
+						}).open();
+			}
+		});
 	}); // end 페이지로드
-	
 </script>
 
 <div>
@@ -108,8 +156,8 @@ td:nth-of-type(2) {
 			<tbody>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="mId" id="mId" />
-					<span id="idCheckResult"></span></td>
+					<td><input type="text" name="mId" id="mId" /> <span
+						id="idCheckResult"></span></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
@@ -133,15 +181,14 @@ td:nth-of-type(2) {
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="mAddress" id="mAddress" /></td>
+					<td><input type="text" name="mAddress" id="mAddress" /> <input
+						type="button" value="주소검색" id="postBtn" /></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2">
-						<input type="button" value="회원가입" id="joinBtn" />
-						<input type="reset" value="입력취소" id="cleanBtn" />
-					</td>
+					<td colspan="2"><input type="button" value="회원가입" id="joinBtn" />
+						<input type="reset" value="입력취소" id="cleanBtn" /></td>
 				</tr>
 			</tfoot>
 		</table>

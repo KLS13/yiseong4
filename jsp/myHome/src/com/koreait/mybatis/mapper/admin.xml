@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.admin">
+	
+	<select id="select_all_member" resultType="com.koreait.dto.Mdto">
+		SELECT * FROM MEMBER
+	</select>
+	
+	
+</mapper>
