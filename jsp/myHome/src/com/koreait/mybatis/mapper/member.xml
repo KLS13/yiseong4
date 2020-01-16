@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="update_point" parameterType="String">
-		UPDATE MEMBER SET MPOINT=mPoint+100 WHERE MID=#{mId} AND TO_CHAR(MLOGIN, 'YYMMDD') != TO_CHAR(SYSDATE, 'YYMMDD')
+		UPDATE MEMBER SET MPOINT=mPoint+100, MLOGIN=SYSDATE WHERE MID=#{mId} AND TO_CHAR(MLOGIN, 'YYMMDD') != TO_CHAR(SYSDATE, 'YYMMDD')
 	</update>
 	
 	<delete id = "delete_member" parameterType="String">
