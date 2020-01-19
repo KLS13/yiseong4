@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mybatis.mapper.board">
+
+	<select id="select_board_by_map" parameterType="Map" resultType="com.koreait.dto.Bdto">
+		SELECT
+			*
+		FROM
+			(SELECT
+				ROWNUM R_NUM, A.*
+			FROM
+				(SELECT * FROM BOARD ORDER BY BREF DESC, BSTEP ASC) A)
+		WHERE
+			R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="select_total_record" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			BOARD
+	</select>
+	
+	<insert id="insert_board" parameterType="com.koreait.dto.Bdto">
+		INSERT INTO BOARD VALUES
+		(BOARD_SEQ.NEXTVAL, #{mId}, #{bTitle}, #{bContent}, #{bPw}, #{bIp}, 0, SYSDATE, BOARD_SEQ.CURRVAL, 0, 0, 0)
+	</insert>	
+	
+	<select id="select_board_by_bIdx" parameterType="int" resultType="com.koreait.dto.Bdto">
+		SELECT * FROM BOARD WHERE BIDX = #{bIdx}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<update id="update_board_for_delete" parameterType="com.koreait.dto.Bdto">
+		UPDATE
+			BOARD
+		SET
+			BDELETE = #{bDelete},
+			BTITLE = #{bTitle}
+		WHERE 
+			BIDX = #{bIdx}
+	</update>
+	
+	
+
+</mapper>

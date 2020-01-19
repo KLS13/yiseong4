@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
         <mapper resource="com/koreait/mybatis/mapper/member.xml" />
         <mapper resource="com/koreait/mybatis/mapper/admin.xml" />
+        <mapper resource="com/koreait/mybatis/mapper/board.xml" />
 	</mappers>
 	
 </configuration>

@@ -5,14 +5,25 @@
 
 <!-- header.jsp (동적 포함) -->
 <jsp:include page="/layout/header.jsp" />
+
+<script>
+	function oneMember(f) {
+		var id = f.mId.value;
+		
+		f.action = "/myHome/memberUpdate.ad?mId="+id;
+		f.submit();
+	}
+</script>
 <%-- 관리자로 로그인하면 "관리자메뉴" 표시 --%>
+<form>
 <c:if test="${sessionScope.loginDto.mId eq 'admin' }">
 <h1>관리자님 환영합니다</h1>
 <input type="button" value ="회원관리" onclick="location.href='/myHome/memberPage.ad'" />
 <br />
-<input type="text" name="search" /> <input type="button" value="회원검색"/>
+<input type="text" name="mId" />
+<input type="button" value="회원검색" onclick="oneMember(this.form)"/>
 </c:if>
-
+</form>
 <%-- 일반유저로 로그인하면 "일반유저메뉴" 표시 --%>
 <c:if test="${sessionScope.loginDto.mId ne 'admin' }">
 <h1>홈페이지에 오신 걸 환영합니다</h1>

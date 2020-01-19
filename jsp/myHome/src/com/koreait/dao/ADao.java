@@ -29,4 +29,11 @@ public class ADao {
 		sqlSession.close();
 		return list;
 	}
+	
+	public Mdto getOneMember(String mId) {
+		SqlSession sqlSession = factory.openSession();
+		Mdto mdto = sqlSession.selectOne("select_one_member", mId);
+		sqlSession.close();
+		return mdto;
+	}
 }

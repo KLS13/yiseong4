@@ -9,5 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM MEMBER
 	</select>
 	
-	
+	<select id="select_one_member" parameterType="String" resultType="com.koreait.dto.Mdto">
+		SELECT * FROM MEMBER WHERE MID = #{mId}
+	</select>
 </mapper>
