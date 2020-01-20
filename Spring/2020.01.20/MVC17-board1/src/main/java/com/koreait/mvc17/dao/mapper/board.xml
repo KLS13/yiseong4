@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.korea.mvc17.dao.BoardDao">
+	
+	<select id="list" resultType="com.koreait.mvc17.dto.BoardDto">
+		SELECT * FROM BOARD1 ORDER BY BIDX DESC
+	</select>
+	
+	<select id="view" resultType="com.koreait.mvc17.dto.BoardDto">
+		SELECT * FROM BOARD1 WHERE BIDX = #{bIdx}
+	</select>
+	
+	<update id="modify">
+		UPDATE BOARD1 SET BTITLE = #{param1}, BCONTENT = #{param2}
+		WHERE BIDX = #{param3}
+	</update>
+	
+	<insert id="write">
+		INSERT INTO BOARD1(BWRITER, BTITLE, BCONTENT, BDATE) 
+		VALUES( #{param1}, #{param2}, #{param3}, NOW())
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM
+			BOARD1
+		WHERE
+			BIDX = #{param1}
+	</delete>
+</mapper>
