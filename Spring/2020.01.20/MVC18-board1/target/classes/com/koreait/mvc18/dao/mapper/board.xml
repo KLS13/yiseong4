@@ -29,4 +29,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			BIDX = #{param1}
 	</delete>
+	
+	<!-- 컬럼명은 상수로 처리 :  ${ }
+	MySql 쿼리 : 이름 검색하기
+	<select id="dynamicQueryList" resultType="com.koreait.mvc18.dto.BoardDto">
+		SELECT * FROM BOARD2 WHERE ${param1} LIKE CONCAT('%', #{param2}, '%')
+	</select>
+	 --> 
+	<!-- 표준 sql : 이름 검색하기 -->
+	<select id="dynamicQueryList" resultType="com.koreait.mvc18.dto.BoardDto">
+		SELECT * FROM BOARD2 WHERE ${param1} LIKE #{param2}
+	</select>
 </mapper>

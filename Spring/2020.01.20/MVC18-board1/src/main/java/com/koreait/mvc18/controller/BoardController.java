@@ -12,6 +12,7 @@ import com.koreait.mvc18.command.BoardCommand;
 import com.koreait.mvc18.command.BoardDeleteCommand;
 import com.koreait.mvc18.command.BoardListCommand;
 import com.koreait.mvc18.command.BoardModifyCommand;
+import com.koreait.mvc18.command.BoardQueryCommand;
 import com.koreait.mvc18.command.BoardViewCommand;
 import com.koreait.mvc18.command.BoardWriteCommand;
 
@@ -66,6 +67,14 @@ public class BoardController {
 		boardCommand = new BoardDeleteCommand();
 		boardCommand.execute(sqlSession, model);
 		return "redirect:list";
+	}
+	
+	@RequestMapping("dynamicQuery")
+	public String dynamic(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		boardCommand = new BoardQueryCommand();
+		boardCommand.execute(sqlSession, model);
+		return "list";
 	}
 
 }

@@ -11,5 +11,5 @@ public interface BoardDao {
 	public void modify(String bName, String bTel, String bAddr, String bEmail, String bNote, int bIdx);
 	public int write(String bName, String bTel, String bAddr, String bEmail, String bNote);
 	public void delete(int bIdx);
-	
+	public ArrayList<BoardDto> dynamicQueryList(String query, String content);
 }

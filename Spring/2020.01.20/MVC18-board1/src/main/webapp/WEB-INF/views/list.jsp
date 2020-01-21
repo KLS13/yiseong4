@@ -19,6 +19,24 @@
 </head>
 <body>
 	<div>
+		<form action="dynamicQuery" method="post">
+			검색
+			<select name="query">
+			    <!-- option 값을 db 컬럼명과 맞춰서 작업한다. mybatis 대비 : 대문자로 -->
+				<option value="BNAME">이름</option>
+				<option value="BTEL">전화</option>
+				<option value="BADDR">주소</option>
+				<option value="BEMAIL">이메일</option>
+				<option value="BNOTE">비고</option>
+			</select>
+			<input type="text" name="content"/>
+			<input type="submit" value="검색"/>
+		</form>
+	</div>
+	<br /><br />
+
+
+	<div>
 		<table border="1">
 			<thead>
 				<tr>
