@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.mvc20.dao.ImageDao">
+
+	<select id="imageList" resultType="com.koreait.mvc20.dto.ImageDto">
+		SELECT *
+		FROM IMAGE
+		ORDER BY FIDX DESC;
+	</select>
+	
+	<insert id="imageInsert">
+		INSERT INTO
+		IMAGE (FIDX, FWRITER, FILECOMMENT, FILENAME, FREGDATE)
+		VALUES (IMAGE_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, SYSDATE)
+	</insert>
+	
+</mapper>
