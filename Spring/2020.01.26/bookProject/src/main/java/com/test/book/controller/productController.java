@@ -46,7 +46,7 @@ public class productController {
 		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
 
-		pd.setgImage(File.separator + fileName);
+		pd.setgImage(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		
 		productCommand.product(pd);
 		
@@ -54,11 +54,11 @@ public class productController {
 	}
 	
 	@RequestMapping("home")
-	public String listPage(Model model) { // 전달할 데이터가 있으면 model 을 잡음.
+	public String homePage(Model model) { // 전달할 데이터가 있으면 model 을 잡음.
 		return "home";
 	}
 	
-	@RequestMapping(value="userPointPage", method = RequestMethod.GET)
+	@RequestMapping("userPointPage")
 	public String getGoodsList(Model model) throws Exception {
 		
 		List<ProductDto> list = productCommand.productlist();  // GoodsVO형태의 List형 변수 list 선언

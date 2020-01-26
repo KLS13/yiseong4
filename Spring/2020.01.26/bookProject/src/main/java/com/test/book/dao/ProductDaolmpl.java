@@ -15,7 +15,7 @@ public class ProductDaolmpl implements ProductDao {
 	@Inject
 	private SqlSession sql; 
 	
-	private static String namespace = "com.test.book.mapper.product";
+	private static String namespace = "com.test.book.dao.mapper.product";
 
 	@Override
 	public void product(ProductDto pd) throws Exception {

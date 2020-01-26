@@ -28,6 +28,7 @@ table {
 			<th>상품이름</th>
 			<th>상품수량</th>
 			<th>상품가격</th>
+			<th>교환하기</th>
 		</tr>
 <c:if test="${empty list}">
 <tr>
@@ -41,13 +42,14 @@ table {
 		
 			<c:forEach var="pdto" items="${list}">
 				<tr>
-					<td>
-						<img src="${pageContext.request.contextPath}/imgUpload/${pdto.gImage}" />
-					</td>
 					<td>${pdto.gIdx }</td>
+					<td>
+						<img src="${pageContext.request.contextPath}/${pdto.gImage}" class="imgUpload" >
+					</td>
 					<td>${pdto.gName }</td>
 					<td>${pdto.gQuantity }개</td>
 					<td>${pdto.gPrice }point</td>
+					<td><input type="button" value="교환하기"></td>
 				</tr>
 			</c:forEach>
 		</c:if>
