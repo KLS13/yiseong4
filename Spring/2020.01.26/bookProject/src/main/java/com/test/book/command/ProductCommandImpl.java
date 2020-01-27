@@ -11,6 +11,8 @@ import com.test.book.dto.ProductDto;
 
 @Service
 public class ProductCommandImpl implements ProductCommand {
+	
+	
 
 	@Inject
 	private ProductDao dao;
@@ -23,8 +25,22 @@ public class ProductCommandImpl implements ProductCommand {
 
 	@Override
 	public List<ProductDto> productlist() throws Exception {
-		// TODO Auto-generated method stub
 		return dao.productlist();
 	}
 
+	@Override
+	public ProductDto productDes(int gIdx) throws Exception {
+	
+		return dao.productDes(gIdx);
+	}
+
+	@Override
+	public void ProductModify(ProductDto pd) throws Exception {
+		dao.ProductModify(pd);
+	}
+
+	@Override
+	public void ProductDelete(int gIdx) throws Exception {
+		dao.ProductDelete(gIdx);
+	}
 }

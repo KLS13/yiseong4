@@ -12,4 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM GOODS_T
 	</select>
 	
+	<select id="productDes" resultType="com.test.book.dto.ProductDto">
+		SELECT * FROM GOODS_T WHERE GIDX = #{gIdx}
+	</select>
+	
+	<update id="productModify">
+		UPDATE GOODS_T SET GNAME=#{gName}, GQUANTITY = #{gQuantity}, GPRICE = #{gPrice}, GDATE = sysdate
+		WHERE GIDX = #{gIdx}
+	</update>
+	
+	<delete id="productDelete">
+		DELETE FROM GOODS_T WHERE GIDX=#{gIdx}
+	</delete>
+	
 </mapper>
