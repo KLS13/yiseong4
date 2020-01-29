@@ -33,5 +33,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="goodsBuyMove" resultType="com.bcgbcg.br.dto.GoodsDto">
 		SELECT * FROM GOODS_T WHERE GIDX=#{gIdx}
 	</select>
+	<!-- 굿즈 바로구매 버튼 클릭 후 결제페이지 -->
 	
 </mapper>

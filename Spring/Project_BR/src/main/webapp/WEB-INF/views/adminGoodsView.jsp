@@ -47,7 +47,6 @@ body { background: #fff; }
 				<!-- 관리자 버튼 -->
 				<th>관리자 수정</th>
 				<th>관리자 삭제</th>
-				<th> 비고 </th>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>
@@ -67,13 +66,8 @@ body { background: #fff; }
 						<td>${gdto.gQuantity }개</td>
 						<td>${gdto.gPrice }point</td>
 						<td><input type="button" value="제품수정" onclick="location.href='adminGoodsModifyPage?gIdx=${gdto.gIdx}'"></td>
-						<td><input type="button" value="제품삭제" onclick="location.href='adminGoodsDeletePage?gIdx=${gdto.gIdx}'"></td>
-						<td> 
-						1.관리자만 보이게  <br />
-						2.재고 0 일때 품절처리 <br />
-						3.유저의 포인트 감소 <br />
-						4.상황별 alert 삽입
-						</td>
+						<td><input type="button" value="제품삭제"
+							onclick="location.href='adminGoodsDeletePage?gIdx=${gdto.gIdx }'"/></td>
 					</tr>
 				</c:forEach>
 			</c:if>

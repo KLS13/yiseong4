@@ -62,9 +62,16 @@
 </div>
  
 <div class="inputArea">
- <label for="gDetail">상품상세</label> <br />
- <textarea rows="5" cols="50" id="gDetail" name="gDetail">
- </textarea>
+<label for="gDetail">상품상세</label> <br />
+<textarea rows="5" cols="50" id="gDetail" name="gDetail">
+제품이름 :  ,
+제조국가 : 대한민국 ,
+제품규격 : 미정 ,
+제품중량 : 미정 ,
+제품상태 : 새 제품 ,
+평균배송 : 2~3일  ,
+유의사항 : ※ 제품의 색상은 화면과 다소 차이가 있을 수 있습니다. 
+</textarea>
 </div>
 
 저장 경로 체크 : <%=request.getRealPath("/") %>

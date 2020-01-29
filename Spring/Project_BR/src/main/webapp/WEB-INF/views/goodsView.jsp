@@ -1,83 +1,103 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title></title>
+<link href="https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean" rel="stylesheet">
 <style type="text/css">
+* {
+	box-sizing: border-box;
+	color: black;
+	text-decoration: none;
+}
+
+.container-info {
+	float: left;
+	width: 24%;
+	padding: 15px;
+	position : relative;
+	border: 2px solid #bad8e9;
+	margin : 0px 6px 10px 4px;
+	font-family: 'Jua', sans-serif;
+}
+
+.container-info:hover{
+	font-weight: bold;
+	box-shadow: 1px 1px 20px #ddd;
+	cursor: pointer;
+}
+
+.container-info ul{
+	list-style: none;
+	padding-left:5px; 
+	padding : 15px;
+}
+
+.container-info li{
+	text-align: center;
+}
+
+.container {
+	width: 1000px;
+	margin: 0 auto;
+	overflow: hidden;
+}
 
 .imgUpload {
-	width: 200px;
-	height: 200px;
-	margin: 20px;
+	float: left;
+	width: 100%;
+	height: 230px;
+	margin-bottom: 25px;
 }
-body { background: #fff; }
-.listtable {
-  border-collapse: collapse;
-}  
-.listtable th {
-  padding: 10px;
-  color: #168;
-  border-bottom: 3px solid #168;
+
+.gQuantity {
+	color: #969696;
+	font-size: 0.88rem;
 }
-.listtable td {
-  color: #669;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-   text-align: center;
+
+
+/* 미디어쿼리 */
+@media screen and (max-width: 767px) {
+	.container-info {
+		width: 80%;
+	}
 }
-.listtable tr:hover td {
-  color: #004;
+
+@media screen and (min-width: 768px) and (max-width: 959px) {
+	.container-info {
+		width: 50%;
+	}
 }
 
 </style>
 </head>
 <body>
-<h1> 유저의 아이디와 포인트 정보 + 교환목록으로 이동 추가 + CSS 작업<br />
-교환하기(상세페이지이동) </h1>
-	<form>
-		<table class="listtable">
-			<c:if test="${empty list}">
-				<tr>
-					<td>상품이 없습니다.</td>
-				</tr>
-			</c:if>
 
-			<c:if test="${not empty list}">
-			<c:set var="count" value="1"/>
-			
-				<c:forEach var="gdto" items="${list}">
-					
-					<c:if test="${gdto.gState eq 1}">  <!-- 상태가 1 인 물품 : 품절이 아닌 굿즈 -->
-					
-					<c:if test="${count eq 5 }">  
-						<tr>
-						<c:set var="count" value="1"/>
-					</c:if>
-					
-						<td>
-							${gdto.gIdx } <br />
-							<img
-							src="${pageContext.request.contextPath}/${gdto.gImage}"
-							class="imgUpload" ><br />
-							${gdto.gName }<br />
-							${gdto.gQuantity }개<br />
-							${gdto.gPrice }point<br />
-							<input type="button" value="구매하기" onclick="location.href='goodsBuyPage?gIdx=${gdto.gIdx}'">
-						</td>
-					
-					<c:if test="${count eq 4}">
-						</tr>
-					</c:if>
-						<c:set var="count" value="${count + 1}" />
-					
-					</c:if>
-					
-				</c:forEach>
-			</c:if>
-		</table>
-	</form>
+	<div class="container">
+		<c:if test="${empty list}">
+			상품이 존재하지 않습니다.
+		</c:if>
+
+		<c:if test="${not empty list}">
+			<c:set var="count" value="1" />
+			<c:forEach var="gdto" items="${list}">
+				<c:if test="${gdto.gState eq 1}">
+					<div class="container-info" onclick="location.href='goodsBuyPage?gIdx=${gdto.gIdx}'">
+						<img src="${pageContext.request.contextPath}/${gdto.gImage}"
+							class="imgUpload">
+						<ul>
+							<li><h3>${gdto.gName }</h3></li>
+							<li>${gdto.gPrice }point</li>
+							<li><span class="gQuantity">${gdto.gQuantity }개 남음</span></li>
+						</ul>
+					</div>
+				</c:if>
+			</c:forEach>
+		</c:if>
+	</div>
+
 </body>
 </html>

@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,5 +112,14 @@ public class GoodsController {
 		model.addAttribute("gdto", gdto);
 		
 		return "goodsBuyDes";
+	}
+	
+	@RequestMapping("goodsPayPage")
+	public String GoodsPayPage(@RequestParam("gIdx") int gIdx , Model model) throws Exception {
+
+		GoodsDto gdto = goodsCommand.GoodsPayMove(gIdx);
+		model.addAttribute("gdto", gdto);
+		
+		return "goodsPayDes";
 	}
 }
