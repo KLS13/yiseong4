@@ -4,11 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 h4{
 color: #969696;
 }
@@ -23,6 +23,7 @@ color: #969696;
 }
 .userpoint {
 	background-color: #DDDDDD;
+	background-size: 200px;
 }
 
 .container{
@@ -58,6 +59,7 @@ color: #969696;
 }
 .gdetail ul{
 	width: 1200px;
+	margin-left: 20px;
 }
 
 .gdetail ul li{
@@ -95,9 +97,22 @@ color: #969696;
 .goodsDes li:nth-child(7) {
 	margin-bottom: 33px;
 }
+
+.buy-btn {
+	border: 0px;
+	background-color: white;
+}
+.buy-btn :hover {
+	cursor: pointer;
+}
+
+.point_icon{
+	width : 50px;
+}
 </style>
 </head>
 <body>
+
 <div class="container">
 	<div class="goodsPic">
 	<img src="${pageContext.request.contextPath}/${gdto.gImage}"
@@ -111,7 +126,7 @@ color: #969696;
 		상품 번호(${gdto.gIdx }) <br />
 		상품 재고(${gdto.gQuantity }개)
 		</h4></li>
-		<li><h1>${gdto.gPrice }point</h1></li>
+		<li><img src="images/포인트.png" align="left" class="point_icon"/><h1>${gdto.gPrice }point</h1></li>
 		
 		<li><em class="txt">택배 - </em>
 			<em class="txt-info">무료배송</em>
@@ -130,15 +145,21 @@ color: #969696;
 		<em class="txt">구매 후 회원님의 남는 포인트</em><br />
 		<em class="txt-info">session포인트 - 가격 예정</em>
 		</li>
-		<c:if test="${gdto.gState eq 1}">
-		<li><input type="button" value="바로구매" onclick="location.href='goodsPayPage?gIdx=${gdto.gIdx}'"/><br />
-			이미지 버튼으로 수정 
 		<li>
+		<c:if test="${gdto.gState eq 1}">
+		<button type="button" onclick="location.href='goodsPayPage?gIdx=${gdto.gIdx}'" class="buy-btn">
+		<img src="images/바로구매.png">
+		</button> 
 		</c:if>
+		<button type="button" onclick="location.href='goodsViewPage'" class="buy-btn">
+		<img src="images/더보기.png"/>
+		</button> 
+		</li>
 	</ul>
 	</div>
 	
 	</div>
+	
 	<br />
 	<br />
 	<br />

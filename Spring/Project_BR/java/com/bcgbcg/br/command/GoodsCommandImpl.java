@@ -50,4 +50,12 @@ public class GoodsCommandImpl implements GoodsCommand {
 	public GoodsDto GoodsPayMove(int gIdx) throws Exception {
 		return dao.GoodsBuyMove(gIdx);
 	}
+	@Override
+	public int PayDecision(int gIdx) throws Exception {
+		return dao.PayDecision(gIdx);	
+	}
+	@Override
+	public void PayDecision_User(int gPrice, int uIdx) throws Exception {
+		dao.PayDecision_User(gPrice, uIdx);
+	}
 }

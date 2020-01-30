@@ -5,6 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function goodsReConfirm(f) {
+
+	if ( f.gPrice.value == "" ) {
+		alert("가격을 입력해주세요.");
+		f.gPrice.focus();
+		return false;
+	}
+	if ( f.gQuantity.value == "" ) {
+		alert("수량을 입력하세요.");
+		f.gQuantity.focus();
+		return false;
+	}
+	if ( f.gName.value == "" ) {
+		alert("상품명을 입력하세요.");
+		f.gName.focus();
+		return false;
+	}
+	f.action = "adminModifyRegPage";
+	f.submit();
+}
+
+</script>
 <style>
 	.inputArea{
 		margin: 10px 0;
@@ -37,7 +60,7 @@
 <body>
 <h1>관리자 상품수정 페이지</h1>
 
-<form role="form" action="adminModifyRegPage" method="post" autocomplete="off">
+<form role="form" method="post" autocomplete="off">
 
 <div class="inputArea">
 등록일 : ${gdto.gDate}
@@ -64,11 +87,11 @@
  <label for="gDetail">상품소개</label>
  <textarea rows="5" cols="50" id="gDetail" name="gDetail">
  	${gdto.gDetail }
+ 	
  </textarea>
 </div>
-
 <div class="inputArea">
- <button type="submit" id="product_Btn">재등록</button>
+ <input type="button" value="재등록" onclick="goodsReConfirm(this.form)"/>
 </div>
 </form>
 </body>

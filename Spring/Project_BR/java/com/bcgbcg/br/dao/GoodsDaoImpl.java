@@ -1,5 +1,6 @@
 package com.bcgbcg.br.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,5 +51,20 @@ public class GoodsDaoImpl implements GoodsDao {
 	public GoodsDto GoodsPayMove(int gIdx) throws Exception {
 		return sql.selectOne(namespace + ".goodsBuyMove", gIdx);
 		// 같은 SQL 동작이므로 BuyMove 매퍼를 동일하게 사용하였음.
+	}
+	@Override
+	public int PayDecision(int gIdx) throws Exception {
+		return sql.update(namespace + ".payDecision", gIdx);	
+	}
+	@Override
+	public void PayDecision_User(int gPrice, int uIdx) throws Exception {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("gPrice", gPrice);
+		map.put("uIdx", uIdx);
+		
+		sql.update(namespace + ".payDecision_user", map);
+		
 	}
 }

@@ -14,6 +14,7 @@ public interface GoodsCommand {
 	public void GoodsSoldOut() throws Exception;	
 	public GoodsDto GoodsBuyMove(int gIdx) throws Exception;
 	public GoodsDto GoodsPayMove(int gIdx) throws Exception;
-	
+	public int PayDecision(int gIdx) throws Exception;
+	public void PayDecision_User(int gPrice, int uIdx) throws Exception;
 	
 }

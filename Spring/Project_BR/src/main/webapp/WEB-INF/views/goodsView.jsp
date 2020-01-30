@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean" rel="stylesheet">
 <style type="text/css">
+
 * {
 	box-sizing: border-box;
 	color: black;
@@ -33,7 +30,7 @@
 .container-info ul{
 	list-style: none;
 	padding-left:5px; 
-	padding : 15px;
+	padding : 20px;
 }
 
 .container-info li{
@@ -75,7 +72,6 @@
 </style>
 </head>
 <body>
-
 	<div class="container">
 		<c:if test="${empty list}">
 			상품이 존재하지 않습니다.

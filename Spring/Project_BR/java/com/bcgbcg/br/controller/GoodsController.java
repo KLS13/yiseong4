@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -121,5 +123,28 @@ public class GoodsController {
 		model.addAttribute("gdto", gdto);
 		
 		return "goodsPayDes";
+	}
+	
+	@RequestMapping(value="payDecision", method = RequestMethod.POST)
+	public String PayDecision(@RequestParam("gIdx") int gIdx,
+							  @RequestParam("gPrice") int gPrice,
+							  @RequestParam("uIdx") int uIdx,
+							  HttpServletRequest request,
+							  Model model) throws Exception {
+		//유저 세션 초기화 필요
+		HttpSession session = request.getSession(); // 현재 세션 정보를 가져옴.
+		session.removeAttribute("uDto"); // uDto 세션 삭제 예정 후 uDto 세션으로 다시 생성
+		 
+		
+		int result = goodsCommand.PayDecision(gIdx); // 재고수량 1개 빠짐.
+		goodsCommand.PayDecision_User(gPrice, uIdx); // UserDto 와 dao command 수정
+		GoodsDto gdto = goodsCommand.GoodsDes(gIdx); // 
+		
+		model.addAttribute("gdto", gdto);
+		model.addAttribute("result", result);
+		
+		//세션 작업 필요
+		
+		return "redirect:goodsPayStateMent";
 	}
 }

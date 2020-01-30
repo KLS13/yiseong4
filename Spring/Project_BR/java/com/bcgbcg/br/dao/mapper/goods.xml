@@ -33,6 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="goodsBuyMove" resultType="com.bcgbcg.br.dto.GoodsDto">
 		SELECT * FROM GOODS_T WHERE GIDX=#{gIdx}
 	</select>
-	<!-- 굿즈 바로구매 버튼 클릭 후 결제페이지 -->
+	<!-- 결제확정버튼(주문확인 페이지로 갈 때) 상품 업데이트와 회원 업데이트 -->
+	<update id="payDecision">
+		UPDATE GOODS_T SET GQUANTITY = GQUANTITY-1 WHERE GIDX = #{gIdx}
+	</update>
+	<!-- 결제완료 후  -->
+	<update id="payDecision_user">
+		UPDATE USER_T SET UPOINT = UPOINT-#{gPrice} WHERE UIDX = #{uIdx}
+	</update>
 	
 </mapper>
