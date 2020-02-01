@@ -6,36 +6,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function goodsRemove(f){
+var result = confirm("물품을 삭제하시겠습니까?");
+if(result){
+    f.action="adminGoodsDeletePage";
+    f.submit();
+}else{
+    return false;
+}
+}
+</script>
 <style type="text/css">
-
 .imgUpload {
 	width: 200px;
 	height: 200px;
 	margin: 20px;
 }
-body { background: #fff; }
-.listtable {
-  border-collapse: collapse;
-}  
-.listtable th {
-  padding: 10px;
-  color: #168;
-  border-bottom: 3px solid #168;
-}
-.listtable td {
-  color: #669;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-   text-align: center;
-}
-.listtable tr:hover td {
-  color: #004;
+
+body {
+	background: #fff;
 }
 
+.listtable {
+	border-collapse: collapse;
+}
+
+.listtable th {
+	padding: 10px;
+	color: #168;
+	border-bottom: 3px solid #168;
+}
+
+.listtable td {
+	color: #669;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+
+.listtable tr:hover td {
+	color: #004;
+}
 </style>
 </head>
 <body>
-<h1> 관리자용 </h1>
+	<h1>관리자용</h1>
+	<input type="button" value="고객지원" onclick="location.href='qnaListPage'" />
 	<form>
 		<table border="1" class="listtable">
 			<tr>
@@ -61,13 +78,15 @@ body { background: #fff; }
 						<td>${gdto.gIdx }</td>
 						<td><img
 							src="${pageContext.request.contextPath}/${gdto.gImage}"
-							class="imgUpload" ></td>
+							class="imgUpload"></td>
 						<td>${gdto.gName }</td>
 						<td>${gdto.gQuantity }개</td>
 						<td>${gdto.gPrice }point</td>
-						<td><input type="button" value="제품수정" onclick="location.href='adminGoodsModifyPage?gIdx=${gdto.gIdx}'"></td>
+						<td><input type="button" value="제품수정"
+							onclick="location.href='adminGoodsModifyPage?gIdx=${gdto.gIdx}'"></td>
 						<td><input type="button" value="제품삭제"
-							onclick="location.href='adminGoodsDeletePage?gIdx=${gdto.gIdx }'"/></td>
+							onclick="goodsRemove(this.form)" /> <input type="hidden"
+							id="gIdx" name="gIdx" value="${gdto.gIdx }"></td>
 					</tr>
 				</c:forEach>
 			</c:if>

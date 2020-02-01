@@ -67,12 +67,4 @@
       <beans:property name="maxUploadSize" value="10485760" />
    </beans:bean>
 
-
-	<context:component-scan base-package="com.bcgbcg.br" />
-	<context:component-scan base-package="com.bcgbcg.br.command" />
-	<context:component-scan base-package="com.bcgbcg.br.controller" />
-	<context:component-scan base-package="com.bcgbcg.br.dao" />
-	<context:component-scan base-package="com.bcgbcg.br.dao.mapper" />
-	<context:component-scan base-package="com.bcgbcg.br.dto" />
-	<context:component-scan base-package="com.bcgbcg.br.util" />
 </beans:beans>
