@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bcgbcg.br.dao.QnaDao">
+
+<select id="qnaList" resultType="com.bcgbcg.br.dto.QnaDto">
+	SELECT * FROM
+	(SELECT ROWNUM R_NUM, A.* FROM
+	(SELECT * FROM QNA_T ORDER BY DECODE(qCategory,'1',qCategory),QIDX DESC) A)
+	WHERE R_NUM BETWEEN #{param1} AND #{param2}
+</select>
+
+<select id="qnaListCount" resultType="int">
+	SELECT COUNT(*) FROM QNA_T
+</select>
+
+<insert id="qnaWrite">
+	INSERT INTO QNA_T VALUES(qna_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, sysdate, 0)
+</insert>
+
+<select id="qnaView" resultType="com.bcgbcg.br.dto.QnaDto">
+	SELECT * FROM QNA_T WHERE QIDX = #{param1}
+</select>
+
+<update id="qnaModify">
+	UPDATE QNA_T SET QCATEGORY=#{param2}, QTITLE=#{param3}, QCONTENT=#{param4}, QDATE=sysdate
+	WHERE QIDX=#{param1}
+</update>
+
+<delete id="qnaDelete">
+	DELETE FROM QNA_T WHERE QIDX=#{param1}
+</delete>
+
+</mapper>
