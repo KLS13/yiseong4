@@ -36,10 +36,14 @@ http://www.templatemo.com/tm-406-flex
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <ul class="social-icons">
-                                <li><a href="#" class="fa fa-facebook"></a></li>
-                                <li><a href="#" class="fa fa-twitter"></a></li>
-                                <li><a href="#" class="fa fa-dribbble"></a></li>
-                                <li><a href="#" class="fa fa-linkedin"></a></li>
+                            <c:choose>
+                            <c:when test="${sessionScope.loginDto eq null }">
+                                <li>aaaaaaaaaaaaaaaaaaaaaaa</li>                            
+                            </c:when>
+                            <c:otherwise>
+                            	<li>${sessionScope.loginDto.uId_ }님 안녕하세요</li>
+                            </c:otherwise>
+                            </c:choose>
                             </ul>
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->
@@ -63,6 +67,7 @@ http://www.templatemo.com/tm-406-flex
                                         <li><a href="adminGoodsPage">상품등록</a></li>                                 
                                         <li><a href="adminGoodsViewPage">관리자교환소</a></li>                                 
                                         <li><a href="goodsViewPage">유저용교환소</a></li>                                 
+                                        <li><a href="LoginPage">로그인</a></li>                                 
 
                                     </ul>                                    
                                 </div> <!-- /.main-menu -->

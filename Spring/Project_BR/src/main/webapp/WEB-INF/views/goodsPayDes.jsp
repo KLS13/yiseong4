@@ -65,23 +65,25 @@ tr :nth-child(1) {
 <table border = "2">
 	<tr>
 		<td>고객 아이디</td>
-		<td>sessionScope.로그인 ID</td>
+		<td>${sessionScope.loginDto.uId_ }</td>
 	</tr>
 	<tr>
 		<td>고객 이름</td>
-		<td>sessionScope.로그인 NAME</td>
+		<td>${sessionScope.loginDto.uName}</td>
 	</tr>
 	<tr>
 		<td>고객 전화번호</td>
-		<td>sessionScope.로그인 phone</td>
+		<td>${sessionScope.loginDto.uPhone }</td>
 	</tr>
 	<tr>
 		<td>보유 포인트</td>
-		<td>sessionScope.로그인정보 POINT</td>
+		<td>${sessionScope.loginDto.uPoint }</td>
 	</tr>
 	<tr>
 		<td>고객 배송지</td>
-		<td>인풋태그 : 수정할수 있도록  : sessionScope.로그인정보 ADDR</td>
+		<td>
+		
+		</td>
 	</tr>
 	<tr>
 		<td><img src="images/경고.png" align="left" class="icon_care"/>&nbsp;배송 유의사항</td>
@@ -146,9 +148,9 @@ tr :nth-child(1) {
 <br /><br /><br />
 
 <button type="submit" class="pay-btn"> <img src="images/결제확정.png"/> </button>  
-<button type="button" class="cancel-btn" onclick="history.back()"> <img src="images/결제취소.png"/> </button> 
+<button type="button" class="cancel-btn" onclick="location.href='goodsViewPage'"> <img src="images/결제취소.png"/> </button> 
 
-<input type="hidden" id="uIdx" name="uIdx" value="로그인 세션값"/>
+<input type="hidden" id="uIdx" name="uIdx" value="${sessionScope.loginDto.uIdx}"/>
 <input type="hidden" id="gIdx" name="gIdx" value="${gdto.gIdx }"/>
 <input type="hidden" id="gPrice" name="gPrice" value="${gdto.gPrice }"/>
 </div>

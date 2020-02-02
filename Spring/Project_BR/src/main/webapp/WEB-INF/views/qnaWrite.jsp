@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -100,7 +101,9 @@ function cut_500(obj){
         		<td>
         		<select id="qCategory" name="qCategory">		
         			<option value="">문의유형선택</option>
+        			<c:if test="${sessionScope.loginDto.uId_ eq 'admin'}">
         			<option value="1">공지사항</option>
+        			</c:if>        			
         			<option value="2">가입정보변경</option>
         			<option value="3">오류 및 신고</option>
         			<option value="4">기타</option>
@@ -113,19 +116,19 @@ function cut_500(obj){
             </tr>
             <tr>
                 <th>작성자 ID</th>
-                 <td><input type="text" id="uId_" name="uId_" class="form-control" placeholder="제목을 입력하세요."/></td>
+                 <td>${sessionScope.loginDto.uId_ }</td>
             </tr>
             <tr>
                 <th>문의 내용</th>
                 
-                <td><pre><textarea rows="10" cols="50" placeholder="250자 이내 내용을 입력하세요. " id="qContent" name="qContent" class="form-control"></textarea></pre></td>
+                <td><pre><textarea style="resize: none;" rows="10" placeholder="250자 이내 내용을 입력하세요. " id="qContent" name="qContent" class="form-control"></textarea></pre></td>
             </tr>
 
             <tr>
                 <td colspan="2">
      		 ※ 음란물, 차별, 비하, 혐오 및 초상권, 저작권 침해 게시물은 민, 형사상의 책임을 질 수 있습니다.<br />
      		 ※ 허위문의 또는 광고관련 스팸문의는 제재대상이 될 수 있습니다.
-                    <button type="button" class="pull-right">
+                    <button type="button" class="pull-right" onclick="location.href='qnaListPage'">
                     <img src="resources/images/취소.jpg"/>
                     </button>
                   

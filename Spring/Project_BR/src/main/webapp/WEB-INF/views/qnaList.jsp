@@ -5,8 +5,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 
+<title>Write something else you want</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function idcheck(qnaId,qIdx) {
+	var loginId = '${sessionScope.loginDto.uId_}';
+	var qnaId = qnaId;
+	var qIdx = qIdx;
+	
+	if(loginId == 'admin' || loginId == qnaId){
+		
+		location.href="qnaViewPage?qIdx="+qIdx;
+	}else if(loginId != qnaId){
+		alert("자신의 문의내용만 볼 수 있습니다.");
+		return false;
+	}
+}
+</script>
 <style type="text/css">
 .qnaList{
 	width: 1000px;
@@ -18,28 +39,30 @@
 	table{
 		border-collapse: collapse;
 		width : 1000px;
+		
 	}
-	tr td{
-		padding: 10px;
+	tr td {
+		padding: 11px;
 		padding-right: 20px;
 	}
 	
 	tr :nth-child(1) {
-		width : 20px;
+		
 		text-align: center;
 	}
 	tr :nth-child(2) {
-		width : 500px;
+		width : 630px;
 	}
 	tr :nth-child(3) {
-		width : 110px;
+		width : 120px;
 		text-align: center;
 	}
 	tr :nth-child(4) {
-		width : 110px;
+		width : 120px;
 		text-align: center;
 	}
 	tr :nth-child(5) {
+		width:100px;
 		text-align: center;
 	}
 	
@@ -47,23 +70,32 @@
 		text-decoration: none;	
 		color : black;
 	}
+	a:hover {
+		cursor: pointer;
+	}
+	
+	.pull-right{
+		background: white;
+		border: 0px;
+	}
 </style>
 </head>
 <body>
+<form id="f">
 <div class="qnaList">
 		<table border="1">
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>제목</th>
+					<th style="text-align:center">제목</th>
 					<th>작성자</th>
 					<th>최종작성일</th>
-					<th>답변상태</th>
+					<th>비 고</th>
 			</thead>
 			<tbody>
 				<c:if test="${result eq 0 }">
 					<tr>
-						<td colspan="4"> 게시물이 없습니다. </td>
+						<td colspan="5"> 게시물이 없습니다. </td>
 					</tr>
 				</c:if>
 				<c:if test="${result ne 0 }">
@@ -75,44 +107,45 @@
 						<a href="qnaViewPage?qIdx=${qDto.qIdx}"><font style="font-weight: bold">${qDto.qTitle }</font></a>
 						</c:if>
 						<c:if test="${qDto.qCategory ne 1 }">
-						<a href="qnaViewPage?qIdx=${qDto.qIdx}">${qDto.qTitle }</a>
+						<a onclick="idcheck('${qDto.uId_}','${qDto.qIdx}')">${qDto.qTitle}</a>
 						</c:if>
 						</td>
 						<td>${qDto.uId_}</td>
 						<td>${qDto.qDate}</td>
 						<td>
 						<c:if test="${qDto.qCategory ne 1 && qDto.qCheck eq 0 }">
-						답변없음
+						<font style="color: #969696">답변없음</font>
 						</c:if>
 						<c:if test="${qDto.qCheck eq 1 }">
 						답변완료
 						</c:if>
 						<c:if test="${qDto.qCategory eq 1 && qDto.qCheck eq 0}">
-						공지사항
+						<font style="font-weight: bold">공지사항</font>
 						</c:if>
 						</td>
 					</tr>
 					
 				</c:forEach>
 			
-				</c:if>
-				<tr>
-					<td colspan="5">총 문의글 수 : ${ result } 개</td>
-				</tr>	
+				</c:if>	
 				<tr>
 					<td colspan="5">${pagingView}</td>
 				</tr>	
 			</tbody>
 			<tfoot>
-			
+			<c:if test="${sessionScope.loginDto ne null }">
 				<tr>
+				
 					<td colspan="5">
-						<input type="button" value="문의하기" onclick="location.href='qnaWritePage'" />
+						<button type="button" onclick="location.href='qnaWritePage'" class="pull-right">
+						<img src="images/문의등록.png"/>
+						</button>
 					</td>
 				</tr>
+			</c:if>
 			</tfoot>
 		</table>
 	</div>
-
+</form>
 </body>
 </html>

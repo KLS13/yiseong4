@@ -143,13 +143,20 @@ color: #969696;
 		
 		<li class="userpoint">
 		<em class="txt">구매 후 회원님의 남는 포인트</em><br />
-		<em class="txt-info">session포인트 - 가격 예정</em>
+		<c:if test="${gdto.gState eq 1 && sessionScope.loginDto ne null}">
+		<em class="txt-info">보유포인트(${sessionScope.loginDto.uPoint}) - ${gdto.gPrice} = ${sessionScope.loginDto.uPoint - gdto.gPrice }</em>
+		</c:if>
 		</li>
 		<li>
-		<c:if test="${gdto.gState eq 1}">
+		<c:if test="${gdto.gState eq 1 && sessionScope.loginDto ne null}">
 		<button type="button" onclick="location.href='goodsPayPage?gIdx=${gdto.gIdx}'" class="buy-btn">
 		<img src="images/바로구매.png">
-		</button> 
+		</button>
+		</c:if>
+		<c:if test="${gdto.gState eq 1 && sessionScope.loginDto eq null}">
+		<button type="button" onclick="location.href='#'" class="buy-btn">
+		<img src="images/로그인.png">
+		</button>
 		</c:if>
 		<button type="button" onclick="location.href='goodsViewPage'" class="buy-btn">
 		<img src="images/더보기.png"/>
