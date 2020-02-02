@@ -37,9 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="payDecision">
 		UPDATE GOODS_T SET GQUANTITY = GQUANTITY-1 WHERE GIDX = #{gIdx}
 	</update>
-	<!-- 결제완료 후  -->
+	<!-- 결제완료 후 s -->
 	<update id="payDecision_user">
 		UPDATE USER_T SET UPOINT = UPOINT-#{gPrice} WHERE UIDX = #{uIdx}
 	</update>
+	
+	<select id="loginUpdate" resultType="com.bcgbcg.br.dto.UserDto">
+		SELECT * FROM USER_T WHERE UIDX=#{uIdx}
+	</select>
 	
 </mapper>

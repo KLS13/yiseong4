@@ -12,5 +12,6 @@ public interface QnaDao {
 	public QnaDto qnaView(int qIdx);
 	public void qnaModify(int qIdx, int qCategory,String qTitle,String qContent);
 	public void qnaDelete(int qIdx);
+	public void qnaCheckUpdate(int qIdx);
 	
 }

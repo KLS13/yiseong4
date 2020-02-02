@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bcgbcg.br.dto.GoodsDto;
+import com.bcgbcg.br.dto.UserDto;
 
 @Repository
 public class GoodsDaoImpl implements GoodsDao {
@@ -67,4 +68,11 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql.update(namespace + ".payDecision_user", map);
 		
 	}
+	@Override
+	public UserDto loginUpdate(int uIdx) throws Exception {
+		
+		return sql.selectOne(namespace + ".loginUpdate", uIdx);
+	}
+	
+	
 }

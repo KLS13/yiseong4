@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bcgbcg.br.dao.GoodsDao;
 import com.bcgbcg.br.dto.GoodsDto;
+import com.bcgbcg.br.dto.UserDto;
 
 @Service
 public class GoodsCommandImpl implements GoodsCommand {
@@ -57,5 +58,10 @@ public class GoodsCommandImpl implements GoodsCommand {
 	@Override
 	public void PayDecision_User(int gPrice, int uIdx) throws Exception {
 		dao.PayDecision_User(gPrice, uIdx);
+	}
+	@Override
+	public UserDto loginUpdate(int uIdx) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.loginUpdate(uIdx);
 	}
 }

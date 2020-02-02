@@ -29,8 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE QIDX=#{param1}
 </update>
 
+<update id="qnaCheckUpdate">
+	UPDATE QNA_T SET QCHECK = 1 WHERE QIDX=#{param1}
+</update>
+
 <delete id="qnaDelete">
 	DELETE FROM QNA_T WHERE QIDX=#{param1}
 </delete>
+
 
 </mapper>

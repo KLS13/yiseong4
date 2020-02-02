@@ -9,6 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bcgbcg.br.command.CommentCommand;
+import com.bcgbcg.br.command.CommentViewCommand;
+import com.bcgbcg.br.command.CommentWriteCommand;
+import com.bcgbcg.br.command.LoginCommand;
+import com.bcgbcg.br.command.LoginIdPwCommand;
+import com.bcgbcg.br.command.QnaCheckUpdate;
 import com.bcgbcg.br.command.QnaCommand;
 import com.bcgbcg.br.command.QnaDeleteCommand;
 import com.bcgbcg.br.command.QnaListCommand;
@@ -22,11 +28,15 @@ public class QnaController {
 	@Autowired
 	private SqlSession sqlSession; 
 	private QnaCommand qnaCommand;
+	private CommentCommand commentCommand;
+	private LoginCommand loginCommand;
 	
 	@RequestMapping("qnaWritePage")
 	public String qnaWritePage() {
 		return "qnaWrite";
 	}
+	
+	
 	@RequestMapping("qnaModifyPage")
 	public String qnaModifyPage(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
@@ -72,7 +82,34 @@ public class QnaController {
 	public String view(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		qnaCommand = new QnaViewCommand();
+		commentCommand = new CommentViewCommand();
 		qnaCommand.execute(sqlSession, model);
+		commentCommand.execute(sqlSession, model);
 		return "qnaView";
+	}
+	
+	@RequestMapping(value="commentWrite", method = RequestMethod.POST)
+	public String commentWrite(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		commentCommand = new CommentWriteCommand();
+		qnaCommand = new QnaCheckUpdate();
+		commentCommand.execute(sqlSession, model);
+		qnaCommand.execute(sqlSession, model);
+		
+		return "redirect:qnaListPage";
+	}
+	
+	@RequestMapping(value="login", method = RequestMethod.POST)
+	public String loginIdPw(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		loginCommand = new LoginIdPwCommand();
+		loginCommand.execute(sqlSession, model);
+		
+		return "home";
+	}
+	
+	@RequestMapping("LoginPage")
+	public String LoginPage() {
+		return "loginPage";
 	}
 }

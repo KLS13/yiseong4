@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bcgbcg.br.dao.UserDao">
+
+<select id="loginIdPw" resultType="com.bcgbcg.br.dto.UserDto">
+	SELECT * FROM USER_T WHERE UID_ = #{param1} AND UPASSWORD = #{param2}
+</select>
+
+</mapper>
