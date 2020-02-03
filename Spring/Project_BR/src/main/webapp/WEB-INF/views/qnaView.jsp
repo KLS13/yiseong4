@@ -25,6 +25,7 @@
 <script type="text/javascript">
 	function qnaRemove(f) {
 		var result = confirm("문의내용을 삭제하시겠습니까?");
+
 		if (result) {
 			f.action = "qnaDelete";
 			f.submit();
@@ -98,7 +99,6 @@ pre {
 	background: white;
 	border: 0px;
 }
-
 </style>
 
 </head>
@@ -116,7 +116,7 @@ pre {
 						<td><c:if test="${qDto.qCategory eq 1 }">
         		공지사항
         		</c:if> <c:if test="${qDto.qCategory eq 2 }">
-        		가입정보변경
+        		배송 및 포인트
         		</c:if> <c:if test="${qDto.qCategory eq 3 }">
         		오류 및 신고
         		</c:if> <c:if test="${qDto.qCategory eq 4 }">
@@ -138,18 +138,22 @@ pre {
 
 					<tr>
 						<td colspan="2">
+						<c:if test="${sessionScope.loginDto.uId_ eq qDto.uId_ or sessionScope.loginDto.uId_ eq 'admin'}">
 							<button type="button" value="수정하기"
 								onclick="location.href='qnaModifyPage?qIdx=${qDto.qIdx}'"
 								class="pull-right">
-								<img src="images/수정.jpg" />
+								<img src="images/수정.png" />
 							</button>
 							<button type="button" value="삭제하기" onclick="qnaRemove(this.form)"
 								class="pull-right">
-								<img src="images/삭제.jpg" />
+								<img src="images/삭제.png" />
 							</button>
-							<button type="button" value="목록으로 가기" onclick="location.href='qnaListPage'"
-								class="pull-right">
-								<img src="images/목록.jpg" />
+
+							
+						</c:if>
+							<button type="button" value="목록으로 가기"
+								onclick="location.href='qnaListPage'" class="pull-right">
+								<img src="images/목록.png" />
 							</button> <input type="hidden" id="qIdx" name="qIdx" value="${qDto.qIdx}">
 						</td>
 					</tr>
@@ -158,62 +162,77 @@ pre {
 
 		</table>
 
-<c:if test="${qDto.qCategory ne 1 }">
-		<table class="table table-bordered">
-			<thead>
-			<caption>관리자 - 답변내용</caption>
-			</thead>
-			<tbody>
-			<c:if test="${empty cDto}">
-			<tr>
-				<td colspan="2"> 답변내용이 없습니다. </td>
-			</c:if>
-			
-			<c:if test="${!empty cDto}">
-				<tr>
-					<th>답변 등록일</th>
-					<td>${cDto.cDate}</td>
-				</tr>
-				<tr>
-					<th>답변 제목</th>
-					<td>${qDto.uId_ }님 답변입니다.</td>
-				</tr>
-				<tr>
-					<th>답변 내용</th>
-					<td style="white-space: pre-line;">${cDto.cContent}</td>
-				</tr>
-			</c:if>
-			</tbody>
-		</table>
-</c:if>
-<c:if test="${sessionScope.loginDto.uId_ eq 'admin' }">
-
-		<form method="post">
-			<!-- 관리자만 -->
-			<table class="table table-bordered" style="width:100%">
+		<c:if test="${qDto.qCategory ne 1 }">
+			<table class="table table-bordered">
 				<thead>
-				<caption>관리자 - 답변하기</caption>
+				<caption>관리자 - 답변내용</caption>
 				</thead>
 				<tbody>
-					<tr>
-						<th>답변 제목</th>
-						<td>${qDto.uId_ }님답변입니다.</td>
-					</tr>
-					<tr>
-						<th>답변 내용</th>
-						
-						<td><pre style="width:100%"><textarea  style="width:100%; resize: none;" rows="10" placeholder="250자 이내 내용을 입력하세요."id="cContent" name="cContent" class="form-control"></textarea></pre></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<button type="button" id="commit-btn" class="pull-right"
-								onclick="commentCommit(this.form)">
-								<img src="images/등록.jpg">
-							</button> <input type="hidden" id="qIdx" name="qIdx" value="${qDto.qIdx }">
-							</form>
+					<c:if test="${empty cDto}">
+						<tr>
+							<td colspan="2">답변내용이 없습니다.</td>
+					</c:if>
+
+					<c:if test="${!empty cDto}">
+						<tr>
+							<th>답변 등록일</th>
+							<td>${cDto.cDate}</td>
+						</tr>
+						<tr>
+							<th>답변 제목</th>
+							<td>${qDto.uId_ }님 답변입니다.</td>
+						</tr>
+						<tr>
+							<th>답변 내용</th>
+							<td style="white-space: pre-line;">${cDto.cContent}</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+						<c:if test="${sessionScope.loginDto.uId_ eq 'admin'}">
+							<button type="button" value="수정하기"
+								onclick="location.href='commentModifyPage?qIdx=${cDto.qIdx}'"
+								class="pull-right">
+								<img src="images/수정.png" />
+							</button>
+						</c:if>
+						</tr>
+					</c:if>
 				</tbody>
 			</table>
-			</c:if>
+		</c:if>
+		<c:if test="${sessionScope.loginDto.uId_ eq 'admin' and empty cDto}">
+
+			<form method="post">
+				<!-- 관리자만 -->
+				<table class="table table-bordered" style="width: 100%">
+					<thead>
+					<caption>관리자 - 답변하기</caption>
+					</thead>
+					<tbody>
+						<tr>
+							<th>답변 제목</th>
+							<td>${qDto.uId_ }님 답변입니다.</td>
+						</tr>
+						<tr>
+							<th>답변 내용</th>
+
+							<td><pre style="width: 100%">
+									<textarea style="width: 100%; resize: none;" rows="10"
+										placeholder="250자 이내 내용을 입력하세요." id="cContent" name="cContent"
+										class="form-control"></textarea>
+								</pre></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="button" id="commit-btn" class="pull-right"
+									onclick="commentCommit(this.form)">
+									<img src="images/등록.jpg">
+								</button> <input type="hidden" id="qIdx" name="qIdx"
+								value="${qDto.qIdx }">
+								</form>
+					</tbody>
+				</table>
+		</c:if>
 	</div>
 </body>
 </html>

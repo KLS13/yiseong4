@@ -7,6 +7,20 @@
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function pointCheck(f) {
+	var gPrice = ${gdto.gPrice};
+	var gIdx = ${gdto.gIdx};
+	var uPoint = ${sessionScope.loginDto.uPoint};
+	
+	if(gPrice > uPoint) {
+		alert("포인트가 부족합니다.");
+		return false;
+	}else{
+	location.href='goodsPayPage?gIdx='+gIdx;
+	}
+}
+</script>
 <style type="text/css">
 
 h4{
@@ -112,7 +126,6 @@ color: #969696;
 </style>
 </head>
 <body>
-
 <div class="container">
 	<div class="goodsPic">
 	<img src="${pageContext.request.contextPath}/${gdto.gImage}"
@@ -149,7 +162,7 @@ color: #969696;
 		</li>
 		<li>
 		<c:if test="${gdto.gState eq 1 && sessionScope.loginDto ne null}">
-		<button type="button" onclick="location.href='goodsPayPage?gIdx=${gdto.gIdx}'" class="buy-btn">
+		<button type="button" onclick="pointCheck()" class="buy-btn">
 		<img src="images/바로구매.png">
 		</button>
 		</c:if>
@@ -164,9 +177,7 @@ color: #969696;
 		</li>
 	</ul>
 	</div>
-	
 	</div>
-	
 	<br />
 	<br />
 	<br />

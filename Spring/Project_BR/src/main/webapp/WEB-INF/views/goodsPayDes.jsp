@@ -5,6 +5,92 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>  
+function fncSubmit(f){
+var doubleSubmitFlag = false;
+    if(doubleSubmitFlag){
+        alert("중복");
+        return false;
+    }else{
+        doubleSubmitFlag = true;
+        f.action="payDecision";
+        f.submit();
+    }
+}
+
+
+$(function aa() {
+   $('#search_addr_btn').click(function() {
+      execDaumPostcode();
+   });
+   function execDaumPostcode() {
+      new daum.Postcode(
+            {
+               oncomplete : function(data) {
+                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                  // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                  // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                  var fullAddr = ''; // 최종 주소 변수
+                  var extraAddr = ''; // 조합형 주소 변수
+                  // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                  if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                     fullAddr = data.roadAddress;
+                  } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                     fullAddr = data.jibunAddress;
+                  }
+                  // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                  if (data.userSelectedType === 'R') {
+                     //법정동명이 있을 경우 추가한다.
+                     if (data.bname !== '') {
+                        extraAddr += data.bname;
+                     }
+                     // 건물명이 있을 경우 추가한다.
+                     if (data.buildingName !== '') {
+                        extraAddr += (extraAddr !== '' ? ', '
+                              + data.buildingName
+                              : data.buildingName);
+                     }
+                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                     fullAddr += (extraAddr !== '' ? ' ('
+                           + extraAddr + ')' : '');
+                  }
+                  // 우편번호와 주소 정보를 해당 필드에 넣는다.                     
+                  document.getElementById('pAddress').value = fullAddr;
+
+                  // 커서를 상세주소 필드로 이동한다.
+                  document.getElementById('pAddressDetail').focus();
+               }
+            }).open();
+   }
+});
+
+$(document).ready(function(){
+	$("#infoCheck").change(function(){
+		if($("#infoCheck").is(":checked")){
+			alert("기본가입정보를 불러옵니다.");
+			$('#pReceiver').val('${sessionScope.loginDto.uName }');
+			$('#pPhone').val('${sessionScope.loginDto.uPhone }');
+			$('#pAddress').val('${sessionScope.loginDto.uAddress}');
+			$('#pAddressDetail').val('${sessionScope.loginDto.uAddressDetail}');
+		}else{
+			$('#pReceiver').val('');
+			$('#pPhone').val('');
+			$('#pAddress').val('');
+			$('#pAddressDetail').val('');
+		}
+	});
+});
+
+ </script>
+
 <style type="text/css">
 .userInfo {
 	width: 1200px;
@@ -55,13 +141,14 @@ tr :nth-child(1) {
 </style>
 </head>
 <body>
-<form action="payDecision" method="POST">
+<form method="POST">
 
 
 <div class="userInfo">
 <h1 align="center">결제요청 페이지</h1>
 <br /><br /><br />
-<h1>회원정보</h1>
+<h1>배송정보</h1>
+<input type="checkbox" name="infoCheck" id="infoCheck" />기본가입정보 불러오기
 <table border = "2">
 	<tr>
 		<td>고객 아이디</td>
@@ -72,17 +159,34 @@ tr :nth-child(1) {
 		<td>${sessionScope.loginDto.uName}</td>
 	</tr>
 	<tr>
-		<td>고객 전화번호</td>
-		<td>${sessionScope.loginDto.uPhone }</td>
-	</tr>
-	<tr>
 		<td>보유 포인트</td>
 		<td>${sessionScope.loginDto.uPoint }</td>
 	</tr>
 	<tr>
-		<td>고객 배송지</td>
+		<td>수령인 이름</td>
+		<td><input type="text" id="pReceiver" name="pReceiver"></td>
+	</tr>
+	<tr>
+		<td>수령인 전화번호</td>
+		<td><input type="text" id="pPhone" name="pPhone"></td>
+	</tr>
+	<tr>
+		<td>수령인 배송지</td>
 		<td>
-		
+		<input type="text" id="pAddress" name="pAddress" readonly="readonly"/>
+		<input type="text" id="pAddressDetail" name="pAddressDetail"/>
+		<input type="button" name="search_addr_btn" id="search_addr_btn" value="주소 검색" >
+		</td>
+	</tr>
+	<tr>
+		<td>요구사항</td>
+		<td><select id="pMessage" name="pMessage">
+			<option value="안전배송부탁드려요.">안전배송부탁드려요.</option>
+			<option value="빠른배송부탁드려요.">빠른배송부탁드려요.</option>
+			<option value="부재시 관리실에 맡겨주세요.">부재시 관리실에 맡겨주세요.</option>
+			<option value="부재시 문 앞에 놔주세요.">부재시 문 앞에 놔주세요.</option>
+			<option value="도착 전 연락바랍니다.">도착 전 연락바랍니다.</option>
+		</select>
 		</td>
 	</tr>
 	<tr>
@@ -147,10 +251,11 @@ tr :nth-child(1) {
 
 <br /><br /><br />
 
-<button type="submit" class="pay-btn"> <img src="images/결제확정.png"/> </button>  
+<button type="button" class="pay-btn" onclick="fncSubmit(this.form)"> <img src="images/결제확정.png"/> </button>  
 <button type="button" class="cancel-btn" onclick="location.href='goodsViewPage'"> <img src="images/결제취소.png"/> </button> 
 
 <input type="hidden" id="uIdx" name="uIdx" value="${sessionScope.loginDto.uIdx}"/>
+<input type="hidden" id="uId_" name="uId_" value="${sessionScope.loginDto.uId_}"/>
 <input type="hidden" id="gIdx" name="gIdx" value="${gdto.gIdx }"/>
 <input type="hidden" id="gPrice" name="gPrice" value="${gdto.gPrice }"/>
 </div>

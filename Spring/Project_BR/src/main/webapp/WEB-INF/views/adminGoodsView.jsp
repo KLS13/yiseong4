@@ -7,11 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-function goodsRemove(f){
+function goodsRemove(gIdx){
+	var gIdx = gIdx;
 var result = confirm("물품을 삭제하시겠습니까?");
 if(result){
-    f.action="adminGoodsDeletePage";
-    f.submit();
+    location.href='adminGoodsDeletePage?gIdx='+gIdx;
 }else{
     return false;
 }
@@ -61,6 +61,7 @@ body {
 				<th>상품이름</th>
 				<th>상품수량</th>
 				<th>상품가격</th>
+				<th>상품상태</th>
 				<!-- 관리자 버튼 -->
 				<th>관리자 수정</th>
 				<th>관리자 삭제</th>
@@ -82,11 +83,16 @@ body {
 						<td>${gdto.gName }</td>
 						<td>${gdto.gQuantity }개</td>
 						<td>${gdto.gPrice }point</td>
+						<td>
+						<c:if test="${gdto.gState eq 0}">
+							삭제 또는 품절처리된 상품입니다.
+						</c:if>
+						</td>
 						<td><input type="button" value="제품수정"
 							onclick="location.href='adminGoodsModifyPage?gIdx=${gdto.gIdx}'"></td>
 						<td><input type="button" value="제품삭제"
-							onclick="goodsRemove(this.form)" /> <input type="hidden"
-							id="gIdx" name="gIdx" value="${gdto.gIdx }"></td>
+							onclick="goodsRemove('${gdto.gIdx}')" />
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>

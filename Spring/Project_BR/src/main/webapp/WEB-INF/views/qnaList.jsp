@@ -83,6 +83,10 @@ function idcheck(qnaId,qIdx) {
 <body>
 <form id="f">
 <div class="qnaList">
+<c:if test="${sessionScope.loginDto ne null }">
+<a onclick="location.href='qnaMyList?uId_=${sessionScope.loginDto.uId_}'">내 문의글만 확인하기</a> &nbsp;
+<a onclick="location.href='qnaListPage'">목록</a>
+</c:if>
 		<table border="1">
 			<thead>
 				<tr>

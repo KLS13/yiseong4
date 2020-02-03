@@ -78,9 +78,8 @@
 		</c:if>
 
 		<c:if test="${not empty list}">
-			<c:set var="count" value="1" />
 			<c:forEach var="gdto" items="${list}">
-				<c:if test="${gdto.gState eq 1}">
+				<c:if test="${gdto.gState ne 0}">
 					<div class="container-info" onclick="location.href='goodsBuyPage?gIdx=${gdto.gIdx}'">
 						<img src="${pageContext.request.contextPath}/${gdto.gImage}"
 							class="imgUpload">
