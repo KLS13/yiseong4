@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.bcgbcg.br.dao.QnaDao;
 import com.bcgbcg.br.dao.UserDao;
 import com.bcgbcg.br.dto.UserDto;
 

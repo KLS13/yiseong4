@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bcgbcg.br.command.CommentCommand;
+import com.bcgbcg.br.command.CommentModifyCommand;
 import com.bcgbcg.br.command.CommentViewCommand;
 import com.bcgbcg.br.command.CommentWriteCommand;
 import com.bcgbcg.br.command.LoginCommand;
@@ -19,6 +20,7 @@ import com.bcgbcg.br.command.QnaCommand;
 import com.bcgbcg.br.command.QnaDeleteCommand;
 import com.bcgbcg.br.command.QnaListCommand;
 import com.bcgbcg.br.command.QnaModifyCommand;
+import com.bcgbcg.br.command.QnaMyListCommand;
 import com.bcgbcg.br.command.QnaViewCommand;
 import com.bcgbcg.br.command.QnaWriteCommand;
 
@@ -111,5 +113,30 @@ public class QnaController {
 	@RequestMapping("LoginPage")
 	public String LoginPage() {
 		return "loginPage";
+	}
+	
+	@RequestMapping("qnaMyList")
+	public String QnaMyList(HttpServletRequest request, Model model) { 
+		model.addAttribute("request", request);
+		qnaCommand = new QnaMyListCommand();
+		qnaCommand.execute(sqlSession, model);
+		
+ 		return "qnaList";
+	}
+	@RequestMapping("commentModifyPage")
+	public String CommentModifyPage(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		commentCommand = new CommentViewCommand();
+		commentCommand.execute(sqlSession, model);
+		return "qnaCommentModify";
+	}
+	
+	@RequestMapping(value="commentModify",method = RequestMethod.POST)
+	public String CommentModify(HttpServletRequest request, Model model) { 
+		model.addAttribute("request", request);
+		commentCommand = new CommentModifyCommand();
+		commentCommand.execute(sqlSession, model);
+		
+		return "redirect:qnaListPage";
 	}
 }

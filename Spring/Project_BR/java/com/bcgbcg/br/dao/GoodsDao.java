@@ -3,6 +3,7 @@ package com.bcgbcg.br.dao;
 import java.util.List;
 
 import com.bcgbcg.br.dto.GoodsDto;
+import com.bcgbcg.br.dto.PurchaseDto;
 import com.bcgbcg.br.dto.UserDto;
 
 public interface GoodsDao {
@@ -18,5 +19,6 @@ public interface GoodsDao {
 	public int PayDecision(int gIdx) throws Exception;
 	public void PayDecision_User(int gPrice, int uIdx) throws Exception;
 	public UserDto loginUpdate(int uIdx) throws Exception;
+	public void PurchaseInsert(PurchaseDto pdto) throws Exception;
 
 }

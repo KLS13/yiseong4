@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bcgbcg.br.dao.GoodsDao;
 import com.bcgbcg.br.dto.GoodsDto;
+import com.bcgbcg.br.dto.PurchaseDto;
 import com.bcgbcg.br.dto.UserDto;
 
 @Service
@@ -63,5 +64,10 @@ public class GoodsCommandImpl implements GoodsCommand {
 	public UserDto loginUpdate(int uIdx) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.loginUpdate(uIdx);
+	}
+	@Override
+	public void PurchaseInsert(PurchaseDto pdto) throws Exception {
+		dao.PurchaseInsert(pdto);
+		
 	}
 }

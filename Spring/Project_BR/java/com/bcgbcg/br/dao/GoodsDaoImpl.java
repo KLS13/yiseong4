@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bcgbcg.br.dto.GoodsDto;
+import com.bcgbcg.br.dto.PurchaseDto;
 import com.bcgbcg.br.dto.UserDto;
 
 @Repository
@@ -38,7 +39,7 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 	@Override
 	public void GoodsDelete(int gIdx) throws Exception {
-		sql.delete(namespace + ".goodsDelete", gIdx);
+		sql.update(namespace + ".goodsDelete", gIdx);
 	}
 	@Override
 	public void GoodsSoldOut() throws Exception {
@@ -73,6 +74,10 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		return sql.selectOne(namespace + ".loginUpdate", uIdx);
 	}
-	
-	
+
+	@Override
+	public void PurchaseInsert(PurchaseDto pdto) throws Exception {
+		sql.insert(namespace + ".purchaseInsert", pdto);
+		
+	}
 }

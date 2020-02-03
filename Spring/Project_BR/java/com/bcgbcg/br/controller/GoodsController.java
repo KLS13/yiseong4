@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bcgbcg.br.command.GoodsCommand;
 import com.bcgbcg.br.dto.GoodsDto;
+import com.bcgbcg.br.dto.PurchaseDto;
 import com.bcgbcg.br.dto.UserDto;
 import com.bcgbcg.br.util.UploadFileUtils;
 
@@ -37,7 +39,7 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("adminGoodsPage")
-	public String pointPage(Model model) { // 전달할 데이터가 있으면 model 을 잡음.
+	public String adminGoods(Model model) {
 		return "adminGoods";
 	}
 	
@@ -72,20 +74,20 @@ public class GoodsController {
 	@RequestMapping("adminGoodsViewPage")
 	public String GoodsList(Model model) throws Exception {
 		
-		List<GoodsDto> list = goodsCommand.Goodslist();  // GoodsVO형태의 List형 변수 list 선언
+		List<GoodsDto> list = goodsCommand.Goodslist();  
 		goodsCommand.GoodsSoldOut();
 		
-		model.addAttribute("list", list);  // 변수 list의 값을 list 세션에 부여
+		model.addAttribute("list", list);  
 		return "adminGoodsView";
 	}
 	
 	@RequestMapping("goodsViewPage")
 	public String GoodsUserList(Model model) throws Exception {
 		
-		List<GoodsDto> list = goodsCommand.Goodslist();  // GoodsVO형태의 List형 변수 list 선언
+		List<GoodsDto> list = goodsCommand.Goodslist();  
 		goodsCommand.GoodsSoldOut();
 		
-		model.addAttribute("list", list);  // 변수 list의 값을 list 세션에 부여
+		model.addAttribute("list", list);  
 		return "goodsView";
 	}
 	
@@ -110,7 +112,7 @@ public class GoodsController {
 		
 		goodsCommand.GoodsDelete(gIdx);
 		
-		return "redirect:home";
+		return "redirect:adminGoodsViewPage";
 	}
 	
 	@RequestMapping("goodsBuyPage")
@@ -135,17 +137,20 @@ public class GoodsController {
 	public String PayDecision(@RequestParam("gIdx") int gIdx,
 							  @RequestParam("gPrice") int gPrice,
 							  @RequestParam("uIdx") int uIdx,
+							  @RequestParam("uId_") String uId_,
+							  PurchaseDto pdto,
 							  HttpServletRequest request,
+							  RedirectAttributes rttr,
 							  Model model) throws Exception {
-		//유저 세션 초기화 필요
-			
+
 		goodsCommand.PayDecision(gIdx); // 재고수량 1개 빠짐.
-		goodsCommand.PayDecision_User(gPrice, uIdx); // UserDto 와 dao command 수정
-		GoodsDto gdto = goodsCommand.GoodsDes(gIdx); // 
-		
-		model.addAttribute("gdto", gdto);
-		UserDto loginDto = new UserDto();
+		goodsCommand.PayDecision_User(gPrice, uIdx); //고객정보에서 포인트 차감
+		goodsCommand.PurchaseInsert(pdto);	
+		GoodsDto gdto = goodsCommand.GoodsDes(gIdx); // 물품정보 저장
 	
+		rttr.addFlashAttribute("gdto", gdto); // 구매한 물품값 넘기기
+		rttr.addFlashAttribute("pdto", pdto); // 배송정보 넘기기
+		UserDto loginDto = new UserDto(); 
 		HttpSession session = request.getSession(); // 현재 세션 정보를 가져옴.
 		session.removeAttribute("loginDto");
 		loginDto = goodsCommand.loginUpdate(uIdx);

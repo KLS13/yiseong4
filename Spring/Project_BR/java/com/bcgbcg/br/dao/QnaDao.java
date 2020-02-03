@@ -13,5 +13,6 @@ public interface QnaDao {
 	public void qnaModify(int qIdx, int qCategory,String qTitle,String qContent);
 	public void qnaDelete(int qIdx);
 	public void qnaCheckUpdate(int qIdx);
+	public List<QnaDto> qnaMyList(String uId_, int begin, int end);
 	
 }
