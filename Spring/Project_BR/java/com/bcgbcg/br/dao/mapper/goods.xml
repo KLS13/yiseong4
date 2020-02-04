@@ -10,9 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!-- 굿즈 리스트 -->
 	<select id="goodslist" resultType="com.bcgbcg.br.dto.GoodsDto">
-		SELECT * FROM GOODS_T
+		SELECT * FROM GOODS_T WHERE GQUANTITY >= 0
 	</select>
-	<!-- 굿즈 수정페이지 -->
+	<!-- 굿즈 수정페이지 들어갈때 -->
 	<select id="goodsDes" resultType="com.bcgbcg.br.dto.GoodsDto">
 		SELECT * FROM GOODS_T WHERE GIDX = #{gIdx}
 	</select>
@@ -27,12 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 굿즈 삭제 -->
 	<update id="goodsDelete">
-		UPDATE GOODS_T SET GSTATE=0 WHERE GIDX=#{gIdx}
+		UPDATE GOODS_T SET GSTATE=0, GQUANTITY = 0 WHERE GIDX=#{gIdx}
 	</update>
 	<!-- 유저 굿즈 구매페이지 이동 -->
 	<select id="goodsBuyMove" resultType="com.bcgbcg.br.dto.GoodsDto">
 		SELECT * FROM GOODS_T WHERE GIDX=#{gIdx}
 	</select>
+	
 	<!-- 결제확정버튼(주문확인 페이지로 갈 때) 상품 업데이트와 회원 업데이트 -->
 	<update id="payDecision">
 		UPDATE GOODS_T SET GQUANTITY = GQUANTITY-1 WHERE GIDX = #{gIdx}

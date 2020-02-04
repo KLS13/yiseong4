@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bcgbcg.br.command.GoodsCommand;
 import com.bcgbcg.br.dto.GoodsDto;
@@ -33,8 +32,11 @@ public class GoodsController {
 		return "home";
 	}
 	
-	@RequestMapping("goodsPayStateMent")
+	@RequestMapping(value="goodsPayStateMent")
 	public String goodsPayStateMent(Model model) { 
+		
+		
+		
 		return "goodsPayStateMent";
 	}
 	
@@ -66,16 +68,11 @@ public class GoodsController {
 		return "redirect:home";
 	}
 	
-	@RequestMapping("goodsBuyCheck")
-	public String GoodsBuyCheck(Model model) {
-		return "buyFinal";
-	}
-	
 	@RequestMapping("adminGoodsViewPage")
 	public String GoodsList(Model model) throws Exception {
 		
-		List<GoodsDto> list = goodsCommand.Goodslist();  
 		goodsCommand.GoodsSoldOut();
+		List<GoodsDto> list = goodsCommand.Goodslist();  
 		
 		model.addAttribute("list", list);  
 		return "adminGoodsView";
@@ -84,8 +81,8 @@ public class GoodsController {
 	@RequestMapping("goodsViewPage")
 	public String GoodsUserList(Model model) throws Exception {
 		
-		List<GoodsDto> list = goodsCommand.Goodslist();  
 		goodsCommand.GoodsSoldOut();
+		List<GoodsDto> list = goodsCommand.Goodslist();  
 		
 		model.addAttribute("list", list);  
 		return "goodsView";
@@ -95,6 +92,7 @@ public class GoodsController {
 	public String GoodsDes(@RequestParam("gIdx") int gIdx , Model model) throws Exception {
 	
 		GoodsDto gdto = goodsCommand.GoodsDes(gIdx);
+		
 		model.addAttribute("gdto", gdto);
 		
 		return "adminGoodsModify";
@@ -103,6 +101,7 @@ public class GoodsController {
 	@RequestMapping(value="adminModifyRegPage", method = RequestMethod.POST)
 	public String GoodsModify(GoodsDto gdto) throws Exception {
 		goodsCommand.GoodsModify(gdto);
+		goodsCommand.GoodsSoldOut();
 		
 		return "redirect:home";
 	}
@@ -140,22 +139,19 @@ public class GoodsController {
 							  @RequestParam("uId_") String uId_,
 							  PurchaseDto pdto,
 							  HttpServletRequest request,
-							  RedirectAttributes rttr,
 							  Model model) throws Exception {
 
 		goodsCommand.PayDecision(gIdx); // 재고수량 1개 빠짐.
 		goodsCommand.PayDecision_User(gPrice, uIdx); //고객정보에서 포인트 차감
 		goodsCommand.PurchaseInsert(pdto);	
 		GoodsDto gdto = goodsCommand.GoodsDes(gIdx); // 물품정보 저장
-	
-		rttr.addFlashAttribute("gdto", gdto); // 구매한 물품값 넘기기
-		rttr.addFlashAttribute("pdto", pdto); // 배송정보 넘기기
-		UserDto loginDto = new UserDto(); 
+
 		HttpSession session = request.getSession(); // 현재 세션 정보를 가져옴.
-		session.removeAttribute("loginDto");
-		loginDto = goodsCommand.loginUpdate(uIdx);
-		session.setAttribute("loginDto", loginDto);
-		
+		session.setAttribute("gdto", gdto); // 구매한 물품값 넘기기
+		session.setAttribute("pdto", pdto); // 배송정보 넘기기	
+		UserDto loginDto = goodsCommand.loginUpdate(uIdx);
+		session.setAttribute("loginDto", loginDto);	
+	
 		return "redirect:goodsPayStateMent";
 	}
 }

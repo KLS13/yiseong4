@@ -67,7 +67,6 @@ public class GoodsCommandImpl implements GoodsCommand {
 	}
 	@Override
 	public void PurchaseInsert(PurchaseDto pdto) throws Exception {
-		dao.PurchaseInsert(pdto);
-		
+		dao.PurchaseInsert(pdto);	
 	}
 }

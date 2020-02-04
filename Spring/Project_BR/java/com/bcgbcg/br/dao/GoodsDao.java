@@ -20,5 +20,6 @@ public interface GoodsDao {
 	public void PayDecision_User(int gPrice, int uIdx) throws Exception;
 	public UserDto loginUpdate(int uIdx) throws Exception;
 	public void PurchaseInsert(PurchaseDto pdto) throws Exception;
+	
 
 }
