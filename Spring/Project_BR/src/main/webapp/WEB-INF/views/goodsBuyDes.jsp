@@ -122,7 +122,7 @@ color: #969696;
 
 .point_icon{
 	width : 50px;
-}
+}z
 </style>
 </head>
 <body>

@@ -12,15 +12,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-function doNotReload(){
-    if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || (event.keyCode == 116) ) {
-        event.keyCode = 0;
-        event.cancelBubble = true;
-        event.returnValue = false;
-    } 
-}
-document.onkeydown = doNotReload;
+$(document).ready(function(){
+	alert("주문이 완료되었습니다.");
+});
 </script>
 <style type="text/css">
 
@@ -74,13 +70,23 @@ tr :nth-child(1) {
 	margin: 0 auto;
 	overflow: hidden;
 }
+
+.myPage{
+	cursor: pointer;
+}
+
+.buy-btn{
+	background : white;
+	border : 0px;
+}
+
 </style>
 </head>
 <body>
 <div class="container">
 <div class="goodsInfo">
 <h2>상품 주문 내역</h2>
-<h5>※ 뒤로가기와 새로고침이 불가능한 페이지입니다. </h5>
+<h5></h5>
 			<img src="${pageContext.request.contextPath}/${gdto.gImage}"
 			align="left" class="imgUpload" >
 			
@@ -107,8 +113,16 @@ tr :nth-child(1) {
 		<td>${pdto.pReceiver}</td>
 	</tr>
 	<tr>
+		<td>수령인</td>
+		<td>${pdto.pPhone}</td>
+	</tr>
+	<tr>
 		<td>배송지</td>
 		<td>${pdto.pAddress } ${pdto.pAddressDetail }</td>
+	</tr>
+	<tr>
+		<td>상세보기</td>
+		<td><a onclick="location.href='#'" class="myPage">주문상세보기</a> </td>
 	</tr>
 	<tr>
 		<td colspan="2">

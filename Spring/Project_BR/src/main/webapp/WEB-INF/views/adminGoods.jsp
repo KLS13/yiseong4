@@ -118,6 +118,7 @@ textarea#gdsDes {
 		<div class="inputArea">
 			<input type="button" value="등록" onclick="goodsCheck(this.form)" />
 		</div>
+
 	</form>
 </body>
 </html>

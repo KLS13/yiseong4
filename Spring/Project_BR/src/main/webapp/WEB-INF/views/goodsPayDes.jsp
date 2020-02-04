@@ -14,19 +14,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>  
-function fncSubmit(f){
 var doubleSubmitFlag = false;
+
+function fncSubmit(f){
+	var pReceiver = f.pReceiver.value;   
+	var pPhone = f.pPhone.value; 
+	var pAddress = f.pAddress.value; 
+	var pAddressDetail = f.pAddressDetail.value; 
+	
+	if(pReceiver == "") {
+		alert("수령인을 입력해주세요.");
+		return false;
+	}else if(pPhone == "") {
+		alert("전화번호를 입력해주세요.");
+		return false;
+	}else if(pAddress == "") {
+		alert("주소를 입력해주세요.");
+		return false;
+	}else if(pAddressDetail == "") {
+		alert("상세주소를 입력해주세요.");
+		return false;
+	}
+		
     if(doubleSubmitFlag){
-        alert("중복");
+        alert('결제처리 중 입니다.');
         return false;
-    }else{
+    }else {        
         doubleSubmitFlag = true;
         f.action="payDecision";
         f.submit();
     }
 }
-
-
 $(function aa() {
    $('#search_addr_btn').click(function() {
       execDaumPostcode();
@@ -76,7 +94,7 @@ $(document).ready(function(){
 	$("#infoCheck").change(function(){
 		if($("#infoCheck").is(":checked")){
 			alert("기본가입정보를 불러옵니다.");
-			$('#pReceiver').val('${sessionScope.loginDto.uName }');
+			$('#pReceiver').val('${sessionScope.loginDto.uName }');    
 			$('#pPhone').val('${sessionScope.loginDto.uPhone }');
 			$('#pAddress').val('${sessionScope.loginDto.uAddress}');
 			$('#pAddressDetail').val('${sessionScope.loginDto.uAddressDetail}');
@@ -88,6 +106,13 @@ $(document).ready(function(){
 		}
 	});
 });
+
+
+window.history.forward();
+function noBack() { 
+
+	window.history.forward();
+}
 
  </script>
 
@@ -140,7 +165,7 @@ tr :nth-child(1) {
 
 </style>
 </head>
-<body>
+<body onload="" pageshow="if(event.persisted) noBack();" onunload="">
 <form method="POST">
 
 
