@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bcgbcg.br.command.BookChartCommand;
+import com.bcgbcg.br.command.BookChartListCommand;
 import com.bcgbcg.br.command.CommentCommand;
 import com.bcgbcg.br.command.CommentModifyCommand;
 import com.bcgbcg.br.command.CommentViewCommand;
@@ -32,6 +34,7 @@ public class QnaController {
 	private QnaCommand qnaCommand;
 	private CommentCommand commentCommand;
 	private LoginCommand loginCommand;
+	private BookChartCommand bookChartCommand;
 	
 	@RequestMapping("qnaWritePage")
 	public String qnaWritePage() {
@@ -138,5 +141,13 @@ public class QnaController {
 		commentCommand.execute(sqlSession, model);
 		
 		return "redirect:qnaListPage";
+	}
+	
+	@RequestMapping("bookChart")
+	public String BookChart(Model model) {
+		bookChartCommand = new BookChartListCommand();
+		bookChartCommand.execute(sqlSession, model);
+		
+		return "home";
 	}
 }
