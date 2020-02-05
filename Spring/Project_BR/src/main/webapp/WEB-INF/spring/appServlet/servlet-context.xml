@@ -58,7 +58,7 @@
    <!-- 업로드 패스 설정 -->
    <beans:bean class="java.lang.String" id="uploadPath">
       <beans:constructor-arg
-          value="D:\Spring\SPRINGworkspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Project_BR\resources" />
+           value="C:\SpringStudy\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\Project_BR\resources" />
 	</beans:bean>
 
    <beans:bean

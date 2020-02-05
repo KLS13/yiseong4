@@ -23,8 +23,19 @@ http://www.templatemo.com/tm-406-flex
         <link rel="stylesheet" href="css/templatemo_style.css">
 
         <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+        
+<style type="text/css">
+	.aaaa{
+		width:600px;
+		height:600px;
+	}
+</style>
     </head>
     <body>
+    
+    
+    
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
@@ -60,16 +71,13 @@ http://www.templatemo.com/tm-406-flex
                                 <div class="col-md-10 col-sm-10 main-menu text-right">
                                     <div class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></div>
                                     <ul class="menu-first">
-                                        <li class="active"><a href="#">홈</a></li>
-                                        <li><a href="#services">베스트셀러</a></li>
-                                        <li><a href="#portfolio">리뷰어추천</a></li>
-                                        <li><a href="#our-team">리뷰게시판</a></li>                                
+                                        <li class="active"><a href="#">홈</a></li>                            
                                         <li><a href="adminGoodsPage">상품등록</a></li>                                 
                                         <li><a href="adminGoodsViewPage">관리자교환소</a></li>                                 
                                         <li><a href="goodsViewPage">유저용교환소</a></li>                                 
-                                        <li><a href="LoginPage">로그인</a></li>                                 
-
-                                    </ul>                                    
+                                        <li><a href="LoginPage">로그인</a></li>   
+                                        <li><a href="bookChart">북차트</a></li>                              
+                                    </ul>                                  
                                 </div> <!-- /.main-menu -->
                             </div>
                         </div> <!-- /#menu-wrapper -->                        
@@ -113,6 +121,43 @@ http://www.templatemo.com/tm-406-flex
                 </div> <!-- /.slider -->
             </div> <!-- /.site-slider -->
         </div> <!-- /.site-main -->
+        <div class="aaaa">
+                        <canvas id="myChart" width="600" height="600"></canvas>
+
+
+        <script>
+              var ctx = document.getElementById("myChart");
+              var myChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                      labels: ["월요일", "화요일", "수요일","목요일","금요일","토요일","일요일"],
+                      datasets: [{
+                          label: '매일매일 독서리뷰',
+                          data: [${bcdto.MON},${bcdto.TUE},${bcdto.WEN},${bcdto.TUR},${bcdto.FRI},${bcdto.SAT},${bcdto.SUN}],
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)',
+                              'rgba(200, 189, 64, 0.2)'
+                          ],
+                          borderColor: [
+                              'rgba(255,99,132,1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)',
+                              'rgba(200, 189, 64, 1)'
+                          ]
+                      }]
+                  }
+              });
+        </script>
+</div>
+
 
 
         <div class="content-section" id="services">
@@ -120,7 +165,7 @@ http://www.templatemo.com/tm-406-flex
                 <div class="row">
                     <div class="heading-section col-md-12 text-center">
                         <h2>사이트 추천책</h2>
-                        <p>사이트에서 추천해주는 책</p>
+                   
                     </div> <!-- /.heading-section -->
                 </div> <!-- /.row -->
                 <div class="row">
@@ -181,116 +226,9 @@ http://www.templatemo.com/tm-406-flex
         </div> <!-- /#services -->
 
 
-
-        <div class="content-section" id="portfolio">
-            <div class="container">
-                <div class="row">
-                    <div class="heading-section col-md-12 text-center">
-                        <h2>리뷰어 추천책</h2>
-                        <p>리뷰가 많이 달린 책</p>
-                    </div> <!-- /.heading-section -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p1.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>New Walk</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p1.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p2.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Boat</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p2.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p7.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Urban</h3>
-                                <p></p>
-                                <a href="images/gallery/p7.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p8.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Cycling</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p8.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p3.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Digital Era</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p3.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p4.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Horizon</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p4.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p5.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Aquatic City</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p5.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="images/gallery/p6.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>New Path</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="images/gallery/p6.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                </div> <!-- /.row -->
-            </div> <!-- /.container -->
-        </div> <!-- /#portfolio -->
-
+	<div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+	</div>
 
         <div class="content-section" id="our-team">
             <div class="container">
@@ -298,6 +236,7 @@ http://www.templatemo.com/tm-406-flex
                     <div class="heading-section col-md-12 text-center">
                         <h2>리뷰게시판</h2>
                         <p><a href="#">리뷰 더보기</a></p>
+                        
                  	</div>
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
