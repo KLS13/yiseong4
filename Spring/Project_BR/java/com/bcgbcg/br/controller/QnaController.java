@@ -9,14 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bcgbcg.br.command.BookChartCommand;
-import com.bcgbcg.br.command.BookChartListCommand;
 import com.bcgbcg.br.command.CommentCommand;
 import com.bcgbcg.br.command.CommentModifyCommand;
 import com.bcgbcg.br.command.CommentViewCommand;
 import com.bcgbcg.br.command.CommentWriteCommand;
-import com.bcgbcg.br.command.LoginCommand;
-import com.bcgbcg.br.command.LoginIdPwCommand;
 import com.bcgbcg.br.command.QnaCheckUpdate;
 import com.bcgbcg.br.command.QnaCommand;
 import com.bcgbcg.br.command.QnaDeleteCommand;
@@ -33,12 +29,11 @@ public class QnaController {
 	private SqlSession sqlSession; 
 	private QnaCommand qnaCommand;
 	private CommentCommand commentCommand;
-	private LoginCommand loginCommand;
-	private BookChartCommand bookChartCommand;
+	
 	
 	@RequestMapping("qnaWritePage")
 	public String qnaWritePage() {
-		return "qnaWrite";
+		return "qna/qnaWrite";
 	}
 	
 	
@@ -47,7 +42,7 @@ public class QnaController {
 		model.addAttribute("request", request);
 		qnaCommand = new QnaViewCommand();
 		qnaCommand.execute(sqlSession, model);
-		return "qnaModify";
+		return "qna/qnaModify";
 	}
 	
 	@RequestMapping(value="qnaModify", method = RequestMethod.POST)
@@ -55,7 +50,7 @@ public class QnaController {
 		model.addAttribute("request", request);
 		qnaCommand = new QnaModifyCommand();
 		qnaCommand.execute(sqlSession, model);
-		return "redirect:qnaListPage";
+		return "redirect:/qnaListPage";
 	}
 	
 	@RequestMapping("qnaDelete")
@@ -63,7 +58,7 @@ public class QnaController {
 		model.addAttribute("request", request);
 		qnaCommand = new QnaDeleteCommand();
 		qnaCommand.execute(sqlSession, model);
-		return "redirect:qnaListPage";
+		return "redirect:/qnaListPage";
 	}
 	
 	@RequestMapping("qnaListPage")
@@ -72,7 +67,7 @@ public class QnaController {
 		qnaCommand = new QnaListCommand();
 		qnaCommand.execute(sqlSession, model);
 		
- 		return "qnaList";
+ 		return "qna/qnaList";
 	}
 	
 	@RequestMapping(value="qnaWrite", method = RequestMethod.POST)
@@ -80,7 +75,7 @@ public class QnaController {
 		model.addAttribute("request", request);
 		qnaCommand = new QnaWriteCommand();
 		qnaCommand.execute(sqlSession, model);		
-		return "redirect:qnaListPage";
+		return "redirect:/qnaListPage";
 	}
 	
 	@RequestMapping("qnaViewPage") 
@@ -90,7 +85,7 @@ public class QnaController {
 		commentCommand = new CommentViewCommand();
 		qnaCommand.execute(sqlSession, model);
 		commentCommand.execute(sqlSession, model);
-		return "qnaView";
+		return "qna/qnaView";
 	}
 	
 	@RequestMapping(value="commentWrite", method = RequestMethod.POST)
@@ -101,22 +96,9 @@ public class QnaController {
 		commentCommand.execute(sqlSession, model);
 		qnaCommand.execute(sqlSession, model);
 		
-		return "redirect:qnaListPage";
+		return "redirect:/qnaListPage";
 	}
-	
-	@RequestMapping(value="login", method = RequestMethod.POST)
-	public String loginIdPw(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
-		loginCommand = new LoginIdPwCommand();
-		loginCommand.execute(sqlSession, model);
-		
-		return "home";
-	}
-	
-	@RequestMapping("LoginPage")
-	public String LoginPage() {
-		return "loginPage";
-	}
+
 	
 	@RequestMapping("qnaMyList")
 	public String QnaMyList(HttpServletRequest request, Model model) { 
@@ -124,14 +106,14 @@ public class QnaController {
 		qnaCommand = new QnaMyListCommand();
 		qnaCommand.execute(sqlSession, model);
 		
- 		return "qnaList";
+ 		return "qna/qnaList";
 	}
 	@RequestMapping("commentModifyPage")
 	public String CommentModifyPage(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		commentCommand = new CommentViewCommand();
 		commentCommand.execute(sqlSession, model);
-		return "qnaCommentModify";
+		return "qna/qnaCommentModify";
 	}
 	
 	@RequestMapping(value="commentModify",method = RequestMethod.POST)
@@ -140,14 +122,6 @@ public class QnaController {
 		commentCommand = new CommentModifyCommand();
 		commentCommand.execute(sqlSession, model);
 		
-		return "redirect:qnaListPage";
-	}
-	
-	@RequestMapping("bookChart")
-	public String BookChart(Model model) {
-		bookChartCommand = new BookChartListCommand();
-		bookChartCommand.execute(sqlSession, model);
-		
-		return "home";
+		return "redirect:/qnaListPage";
 	}
 }

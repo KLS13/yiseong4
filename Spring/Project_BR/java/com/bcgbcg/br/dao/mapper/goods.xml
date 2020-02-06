@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!-- 굿즈 리스트 -->
 	<select id="goodslist" resultType="com.bcgbcg.br.dto.GoodsDto">
-		SELECT * FROM GOODS_T WHERE GQUANTITY >= 0
+		SELECT * FROM GOODS_T WHERE GQUANTITY >= 0 ORDER BY GSTATE DESC, GIDX DESC
 	</select>
 	<!-- 굿즈 수정페이지 들어갈때 -->
 	<select id="goodsDes" resultType="com.bcgbcg.br.dto.GoodsDto">

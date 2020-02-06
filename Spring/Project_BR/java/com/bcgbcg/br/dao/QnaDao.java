@@ -2,7 +2,6 @@ package com.bcgbcg.br.dao;
 
 import java.util.List;
 
-import com.bcgbcg.br.dto.BCDto;
 import com.bcgbcg.br.dto.QnaDto;
 
 public interface QnaDao {
@@ -15,6 +14,5 @@ public interface QnaDao {
 	public void qnaDelete(int qIdx);
 	public void qnaCheckUpdate(int qIdx);
 	public List<QnaDto> qnaMyList(String uId_, int begin, int end);
-	public BCDto bookChartList();
 	
 }

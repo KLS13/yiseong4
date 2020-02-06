@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bcgbcg.br.command.GoodsCommand;
 import com.bcgbcg.br.dto.GoodsDto;
@@ -27,22 +28,15 @@ public class GoodsController {
 	@Autowired
 	private GoodsCommand goodsCommand;
 	
-	@RequestMapping("home")
-	public String homePage(Model model) { 
-		return "home";
-	}
-	
 	@RequestMapping(value="goodsPayStateMent")
 	public String goodsPayStateMent(Model model) { 
-		
-		
-		
-		return "goodsPayStateMent";
+
+		return "goods/goodsPayStateMent";
 	}
 	
 	@RequestMapping("adminGoodsPage")
 	public String adminGoods(Model model) {
-		return "adminGoods";
+		return "goods/adminGoods";
 	}
 	
 	@Resource(name="uploadPath")
@@ -65,9 +59,9 @@ public class GoodsController {
 		
 		goodsCommand.Goods(gdto);
 		
-		return "redirect:home";
+		return "redirect:/adminGoodsViewPage";
 	}
-	
+
 	@RequestMapping("adminGoodsViewPage")
 	public String GoodsList(Model model) throws Exception {
 		
@@ -75,7 +69,7 @@ public class GoodsController {
 		List<GoodsDto> list = goodsCommand.Goodslist();  
 		
 		model.addAttribute("list", list);  
-		return "adminGoodsView";
+		return "goods/adminGoodsView";
 	}
 	
 	@RequestMapping("goodsViewPage")
@@ -85,7 +79,7 @@ public class GoodsController {
 		List<GoodsDto> list = goodsCommand.Goodslist();  
 		
 		model.addAttribute("list", list);  
-		return "goodsView";
+		return "goods/goodsView";
 	}
 	
 	@RequestMapping(value="adminGoodsModifyPage" , method = RequestMethod.GET) 	
@@ -95,7 +89,7 @@ public class GoodsController {
 		
 		model.addAttribute("gdto", gdto);
 		
-		return "adminGoodsModify";
+		return "goods/adminGoodsModify";
 	}
 	
 	@RequestMapping(value="adminModifyRegPage", method = RequestMethod.POST)
@@ -103,7 +97,7 @@ public class GoodsController {
 		goodsCommand.GoodsModify(gdto);
 		goodsCommand.GoodsSoldOut();
 		
-		return "redirect:home";
+		return "redirect:/adminGoodsViewPage";
 	}
 	
 	@RequestMapping("adminGoodsDeletePage")
@@ -111,7 +105,7 @@ public class GoodsController {
 		
 		goodsCommand.GoodsDelete(gIdx);
 		
-		return "redirect:adminGoodsViewPage";
+		return "redirect:/adminGoodsViewPage";
 	}
 	
 	@RequestMapping("goodsBuyPage")
@@ -120,7 +114,7 @@ public class GoodsController {
 		GoodsDto gdto = goodsCommand.GoodsBuyMove(gIdx);
 		model.addAttribute("gdto", gdto);
 		
-		return "goodsBuyDes";
+		return "goods/goodsBuyDes";
 	}
 	
 	@RequestMapping("goodsPayPage")
@@ -129,7 +123,7 @@ public class GoodsController {
 		GoodsDto gdto = goodsCommand.GoodsPayMove(gIdx);
 		model.addAttribute("gdto", gdto);
 		
-		return "goodsPayDes";
+		return "goods/goodsPayDes";
 	}
 	
 	@RequestMapping(value="payDecision", method = RequestMethod.POST)
@@ -139,6 +133,7 @@ public class GoodsController {
 							  @RequestParam("uId_") String uId_,
 							  PurchaseDto pdto,
 							  HttpServletRequest request,
+							  RedirectAttributes rttr,
 							  Model model) throws Exception {
 
 		goodsCommand.PayDecision(gIdx); // 재고수량 1개 빠짐.
@@ -148,10 +143,12 @@ public class GoodsController {
 
 		HttpSession session = request.getSession(); // 현재 세션 정보를 가져옴.
 		session.setAttribute("gdto", gdto); // 구매한 물품값 넘기기
-		session.setAttribute("pdto", pdto); // 배송정보 넘기기	
-		UserDto loginDto = goodsCommand.loginUpdate(uIdx);
+		session.setAttribute("pdto", pdto); // 배송정보 넘기기
+		UserDto loginDto = new UserDto(); 
+		session.removeAttribute("loginDto");
+		loginDto = goodsCommand.loginUpdate(uIdx);
 		session.setAttribute("loginDto", loginDto);	
 	
-		return "redirect:goodsPayStateMent";
+		return "redirect:/goodsPayStateMent";
 	}
 }
