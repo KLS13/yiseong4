@@ -7,6 +7,19 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function goodsCheck(f) {
+	var res = /^[0-9]+$/;
+
+	if (!res.test(f.gPrice.value)) {
+		alert("가격설정은 숫자만 입력해 주십시오.");
+		f.gPrice.focus();
+		return false;
+	}
+	if (!res.test(f.gQuantity.value)) {
+		alert("수량설정은 숫자만 입력해 주십시오.");
+		f.gQuantity.focus();
+		return false;
+	}
+	
 	if(f.gImage.value == "") {
 		alert("사진을 첨부해주세요. (10MB 이하)");
 		return false;
