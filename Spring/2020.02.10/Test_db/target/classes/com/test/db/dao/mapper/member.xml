@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.test.db.dao.MemberDao">
+
+<select id="memberList" resultType="com.test.db.dto.MemberDto">
+	SELECT * FROM MEMBER_T
+</select>
+
+<insert id="memberJoin">
+	INSERT INTO MEMBER_T VALUES(member_seq.nextval, #{param1},#{param2},#{param3},#{param4})
+</insert>
+
+<select id="view" resultType="com.test.db.dto.MemberDto">
+	SELECT * FROM MEMBER_T WHERE MIDX = #{param1}
+</select>
+
+<delete id="remove">
+	DELETE FROM MEMBER_T WHERE MIDX = #{param1}
+</delete>
+</mapper>
