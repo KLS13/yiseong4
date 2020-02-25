@@ -1,6 +1,7 @@
 package com.project.cm.controller;
 
 import com.project.cm.model.SearchParam;
+import com.project.cm.model.network.Header;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,5 +27,10 @@ public class GetController {
         System.out.println(searchParam.getEmail());
         System.out.println(searchParam.getPage());
         return searchParam;
+    }
+
+    @GetMapping("/header")
+    public Header getHeader() {
+        return Header.builder().resultCode("OK").description("OK").build();
     }
 }
