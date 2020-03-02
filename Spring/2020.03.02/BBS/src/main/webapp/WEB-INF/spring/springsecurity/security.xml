@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http>
+
+		<!-- 사용자 지정 로그인폼 페이지 요청주소 및 로그인 성공시, 실패시 요청 주소 지정 -->
+		<form-login login-page="/loginform.it" default-target-url="/loginsuccess.it"
+			authentication-failure-url="/loginfail.it" />
+
+		<!-- 로그아웃 요청주소 지정 -->
+		<logout logout-success-url="/logoutform.it" />
+
+		<!-- 로그인 세션을 가진 사용자만 접근 가능한 요청주소 지정 -->
+		<intercept-url pattern="/employee*.it" access="ROLE_ADMIN" />
+		<intercept-url pattern="/nemployeelist.it" access="ROLE_USER" />
+
+	</http>
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				
+				<user name="admin" password="1234" authorities="ROLE_ADMIN" />
+				<user name="user" password="1234" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</b:beans>
